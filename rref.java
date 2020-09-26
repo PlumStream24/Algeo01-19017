@@ -1,32 +1,8 @@
 public class rref {
-    // ** FUNKY ** //
-
-    //menukar 2 baris
-    static void tukar(double[][] M, int kol, int baris1, int baris2) {
-        double temp;
-        for (int j = 0; j < kol; j++) {
-            temp = M[baris1][j];
-            M[baris1][j] = M[baris2][j];
-            M[baris2][j] = temp;
-        }
-    }
-
-    //mengalikan baris dengan konstanta
-    static void operasiKaliBaris(double[][] M, int kol, int brsTarget, double operand) {
-        for (int j = 0; j < kol; j++) {
-            M[brsTarget][j] = M[brsTarget][j] * operand;
-        }
-    }
-
-    //operasi baris dengan baris lain
-    static void operasiThdBaris(double[][] M, int kol, int brsTarget, int brsOperator, double faktor) {
-        for (int j = 0; j < kol; j++) {
-            M[brsTarget][j] -= (M[brsOperator][j] * faktor);
-        }
-    }
+    // ** REDUCED ROW ECHELON FORM ** //
 
     //mengubah diagonal menjadi 1
-    static void eselonBeOne(double[][] M, int brs,int kol) {
+    static void EchelonBeOne(double[][] M, int brs,int kol) {
         int eselonOrder = 0;
         double operand;
         int i = 0;
@@ -34,7 +10,7 @@ public class rref {
         while(i < brs && eselonOrder < kol){
             if (M[i][eselonOrder] != 0){
                 operand = (1 / M[i][eselonOrder]);
-                operasiKaliBaris(M, kol, i, operand);
+                Matriks.OperasiKaliBaris(M, kol, i, operand);
                 
                 i++;
                 eselonOrder++;
@@ -53,7 +29,7 @@ public class rref {
         for (int i = 0; i < brs; i++) {
             //cek jika diagonal adalah 0
             //jika 0, ditukar dengan yang tidak 0
-            //jika tidak ada baris dibawahnya yang tidak 0, dicari ke kolom selanjutnya
+            //jika tidak ada baris dibawahnya yang tidak 0, dicari di kolom selanjutnya
             c = 0;
             while (M[i+c][k] == 0) {
                 c++;
@@ -69,23 +45,22 @@ public class rref {
             }
 
             if (c != 0) {
-                tukar(M, kol, i, i+c);
+                Matriks.Tukar(M, kol, i, i+c);
             }
 
             //mengurangi baris sesuai faktor
             for (int j = 0; j < brs; j++) {
                 if (i != j) {
                     double operand = M[j][k] / M[i][k];
-                    System.out.println(operand);
-                    operasiThdBaris(M, kol, j, i, operand);
+                    Matriks.OperasiThdBaris(M, kol, j, i, operand);
                 }
             }
             k++;
             
         }
         //leading one menjadi 1, kemudian print jawaban
-        eselonBeOne(M, brs, kol);
-        PrintAnswer(M, brs, kol);
+        EchelonBeOne(M, brs, kol);
+        //PrintEchelonAnswer(M, brs, kol);
     }
 
     //Cek jika matrix tidak memiliki solusi
@@ -108,7 +83,7 @@ public class rref {
 
     //Mengisi array yang berisi solusi untuk pivot.
     //Jika baris bukan pivot, array akan diisi -999
-    static void fillPivotSolution(double[][] M, double[] arr, int brs, int kol) {
+    static void FillPivotSolution(double[][] M, double[] arr, int brs, int kol) {
         boolean pivot, leadingOneFound;
         int leadingOneIdx = 0;
 
@@ -139,8 +114,8 @@ public class rref {
         
     }
 
-    //mengoutput jawaban
-    static void PrintAnswer(double[][] M, int brs, int kol) {
+    //mengoutput jawaban dari eselon reduksi
+    static void PrintEchelonAnswer(double[][] M, int brs, int kol) {
         double[] pivotValue = new double[kol-1];
         boolean pivot, leadingOneFound;
         int leadingOneIdx = 0;
@@ -152,7 +127,7 @@ public class rref {
         }
 
         //mengisi array pivotValue
-        fillPivotSolution(M, pivotValue, brs, kol);
+        FillPivotSolution(M, pivotValue, brs, kol);
 
         for (int i = 0; i < brs; i++) {
             //mengecek apakah baris merupakan pivot atau bukan
@@ -195,4 +170,5 @@ public class rref {
             }
         }
     }
+
 }
