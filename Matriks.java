@@ -1,0 +1,598 @@
+import java.util.*;
+
+class Matriks {
+    //atribut
+    double[][] Mat = new double[100][100];
+    int baris;
+    int kolom;
+    int mark = -999;
+
+    // ** CONSTRUCTOR ** //
+    Matriks() {
+        //mark adalah -999
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 100; j++) {
+                Mat[i][j] = mark;
+            }
+        }
+        baris=0;
+        kolom=0;
+    }
+
+    // ** METHOD ** //
+    
+    //Isi elemen matriks sesuai M dan N
+    void IsiMatriks(int M, int N) {
+        Scanner in = new Scanner(System.in);
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                this.Mat[i][j] = in.nextInt();
+            }
+        }
+        in.close();
+        this.baris = M;
+        this.kolom = N;
+    }
+
+    //Print matriks ke layar
+    void TulisMatriks() {
+        for (int i = 0; i < this.baris; i++) {
+            for (int j = 0; j < this.kolom; j++) {
+                if (this.Mat[i][j] != this.mark) {
+                    System.out.print(this.Mat[i][j] + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    // ** FUNKY ** //
+
+    //menukar 2 baris
+    static void Tukar(double[][] M, int kol, int baris1, int baris2) {
+        double temp;
+        for (int j = 0; j < kol; j++) {
+            temp = M[baris1][j];
+            M[baris1][j] = M[baris2][j];
+            M[baris2][j] = temp;
+        }
+    }
+
+    //mengalikan baris dengan konstanta
+    static void OperasiKaliBaris(double[][] M, int kol, int brsTarget, double operand) {
+        for (int j = 0; j < kol; j++) {
+            M[brsTarget][j] = M[brsTarget][j] * operand;
+        }
+    }
+
+    //operasi baris dengan baris lain
+    static void OperasiThdBaris(double[][] M, int kol, int brsTarget, int brsOperator, double faktor) {
+        for (int j = 0; j < kol; j++) {
+            M[brsTarget][j] -= (M[brsOperator][j] * faktor);
+        }
+    }
+
+    //menyalin matriks
+    static void CopyMatrix(double[][] Morigin, double[][] Mresult, int brs, int kol) {
+        for (int i = 0; i < brs; i++) {
+            for (int j = 0; j < kol; j++) {
+                Mresult[i][j] = Morigin[i][j];
+            }
+        }
+    }
+
+
+    // ** REDUCED ROW ECHELON FORM ** //
+
+    //mengubah diagonal menjadi 1
+    static void EchelonBeOne(double[][] M, int brs,int kol) {
+        int eselonOrder = 0;
+        double operand;
+        int i = 0;
+        //Matriks yg berada di kolom eselonOrder harus 1
+        while(i < brs && eselonOrder < kol){
+            if (M[i][eselonOrder] != 0){
+                operand = (1 / M[i][eselonOrder]);
+                OperasiKaliBaris(M, kol, i, operand);
+                
+                i++;
+                eselonOrder++;
+            } else {
+                eselonOrder++;
+            }
+        }
+    }
+
+    //mengubah matriks menjadi matriks eselon reduksi
+    static void RREF(double[][] M, int brs, int kol) {
+        int k = 0;
+        int c = 0;
+        //double det = 1;
+
+        for (int i = 0; i < brs; i++) {
+            //cek jika diagonal adalah 0
+            //jika 0, ditukar dengan yang tidak 0
+            //jika tidak ada baris dibawahnya yang tidak 0, dicari di kolom selanjutnya
+            c = 0;
+            while (M[i+c][k] == 0) {
+                c++;
+
+                if ((i + c) == brs) {
+                    c = 0;
+                    k++;
+                }
+
+                if (k == kol) {
+                    break;
+                }
+            }
+
+            if (c != 0) {
+                Tukar(M, kol, i, i+c);
+            }
+
+            //mengurangi baris sesuai faktor
+            for (int j = 0; j < brs; j++) {
+                if (i != j) {
+                    double operand = M[j][k] / M[i][k];
+                    OperasiThdBaris(M, kol, j, i, operand);
+                }
+            }
+            k++;
+            
+        }
+        //leading one menjadi 1, kemudian print jawaban
+        EchelonBeOne(M, brs, kol);
+        //PrintEchelonAnswer(M, brs, kol);
+    }
+
+    //Cek jika matrix tidak memiliki solusi
+    //Jika ujung kanan baris non-0 dan sisanya 0, return true
+    static boolean CheckForNoSolution(double[][] M, int brs, int kol) {
+        boolean zero;
+        for (int i = brs-1; i >= 0; i--) {
+            zero = true;
+            for (int j = 0; j < kol-1; j++) {
+                if (M[i][j] != 0) {
+                    zero = false;
+                }
+            }
+            if (zero) {
+                return (M[i][kol-1] != 0);
+            }
+        }
+        return false;
+    }
+
+    //Mengisi array yang berisi solusi untuk pivot.
+    //Jika baris bukan pivot, array akan diisi -999
+    static void FillPivotSolution(double[][] M, double[] arr, int brs, int kol) {
+        boolean pivot, leadingOneFound;
+        int leadingOneIdx = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = -999;
+        }
+
+        for (int i = 0; i < brs; i++) {
+            pivot = true;
+            leadingOneFound = false;
+            for (int j = 0; j < kol - 1; j++) {
+                if (M[i][j] != 0) {
+                    if (!leadingOneFound) {
+                        leadingOneFound = true;
+                        leadingOneIdx = j;
+                    } else {
+                        pivot = false;
+                    }
+                }
+            }
+
+            //mengisi array dengan solusi jika baris merupakan pivot.
+            //jika baris berisi 0 atau memiliki angka selain leading one, tidak akan diisi
+            if (pivot && leadingOneFound) {
+                arr[leadingOneIdx] = M[i][kol-1];
+            }
+        }
+        
+    }
+
+    //mengoutput jawaban dari eselon reduksi
+    static void PrintEchelonAnswer(double[][] M, int brs, int kol) {
+        double[] pivotValue = new double[kol-1];
+        boolean pivot, leadingOneFound;
+        int leadingOneIdx = 0;
+
+        //jika tidak ada solusi, akan berhenti
+        if (CheckForNoSolution(M, brs, kol)) {
+            System.out.println("No Solution");
+            return;
+        }
+
+        //mengisi array pivotValue
+        FillPivotSolution(M, pivotValue, brs, kol);
+
+        for (int i = 0; i < brs; i++) {
+            //mengecek apakah baris merupakan pivot atau bukan
+            pivot = true;
+            leadingOneFound = false;
+            for (int j = 0; j < kol - 1; j++) {
+                if (M[i][j] != 0) {
+                    if (!leadingOneFound) {
+                        leadingOneFound = true;
+                        leadingOneIdx = j;
+                    } else {
+                        pivot = false;
+                    }
+                }
+            }
+
+            //jika baris 0 semua, akan dilanjutkan ke baris selanjutnya
+            if (!leadingOneFound) {
+                continue;
+            }
+
+            //jika baris pivot akan output solusi uniknya
+            //jika bukan, akan menggunakan parametrik
+            if (pivot) {
+                System.out.println("x" + (i+1) + " = "  + pivotValue[i]);
+            } else {
+                System.out.print("x" + (i+1) + " = ");
+                for (int k = leadingOneIdx + 1; k < kol - 1; k++) {
+                    if (M[i][k] != 0) {
+                        if (pivotValue[k] == 0) {
+                            continue;
+                        } else if (pivotValue[k] != -999) {
+                            System.out.print(-1*M[i][k]*pivotValue[k] + " + ");
+                        } else {
+                            System.out.print(-1*M[i][k] + "x" + (k+1) + " + ");
+                        }
+                    }
+                }
+                System.out.println(M[i][kol-1]);
+            }
+        }
+    }
+
+
+    // ** DETERMINANT MATRIX ** //
+
+    // Metode OBE //
+    static double determinant1(double[][] M, int baris, int kolom) {
+        double det = 1;
+
+        for (int i = 0; i < baris; i++) {
+            //cek jika diagonal adalah 0,
+            //jika 0, ditukar dengan yang tidak 0
+            if (M[i][i] == 0) {
+                int c = 1;
+                //mencari indeks baris di kolom i yang tidak 0
+                while ((i + c) < baris && M[i+c][i] == 0) {
+                    c++;
+                }
+
+                //terminasi jika semua baris di kolom i 0
+                if ((i + c) == baris) {
+                    return 0;
+                }
+
+                //Tukar baris
+                det *= -1;
+                Tukar(M, kolom, i, i+c);
+            }
+            
+            //mengurangi baris sesuai faktor
+            for (int j = i+1; j < baris; j++) {
+                double operand = M[j][i] / M[i][i];
+                OperasiThdBaris(M, kolom, j, i, operand);
+            }
+            //mengalikan diagonal
+            det *= M[i][i];
+        }
+        return det;
+    }
+
+    // Metode Kofaktor //
+    //Mendapatkan matriks kofaktor dari baris p dan kolom q pada mat[][]
+    //n: dimensi matrix mat[][]
+    static void getMatrixCofactor(double mat[][], double temp[][], int p, int q, int n) {
+        int i = 0, j = 0;
+        for (int brs = 0; brs < n; brs++) {
+            for (int kol = 0; kol < n; kol++) {
+                if (brs != p && kol != q) {
+                    temp[i][j] = mat[brs][kol];
+                    j++;
+                    //mereset j (kolom) ketika mencapai ujung
+                    if (j == n-1) {
+                        j = 0;
+                        i++;
+                    }
+                }
+            }
+        }
+    }
+
+    //Menghitung determinan dari kofaktor yang didapat
+    //n : dimensi matrix max[][]
+    static double determinant2(double mat[][], int n) {
+        double det = 0;
+        int sign = 1;
+
+        //Basis
+        //jika dimensi 1, akan mereturn indeks [0][0] pada matriks
+        if (n == 1) {
+            return mat[0][0];
+        }
+        
+        //declare matriks untuk kofaktor
+        double[][] temp = new double[n-1][n-1];
+
+        //Rekurens
+        //mengalikan baris 0 ke kofaktornya
+        for (int k = 0; k < n; k++) {
+            getMatrixCofactor(mat, temp, 0, k, n);
+            det += sign * mat[0][k] * determinant2(temp, n-1);
+
+            sign = -sign;
+        }
+
+        return det;
+    }
+
+
+    // ** INVERSE MATRIX ** //
+    
+    //mencari apakah matriks memiliki inverse atau tidak
+    //true untuk ada, dan false untuk tidak
+    static boolean InverseExist(double[][] M, int brs, int kol) {
+        boolean zero; 
+        double[][] tempM = new double[brs][kol];
+
+        //terminasi jika matriks bukan persegi
+        if (brs != kol) {
+            return false;
+        }
+
+        //mengisi temporary matrix dan dijadikan eselon
+        CopyMatrix(M, tempM, brs, kol);
+        RREF(tempM, brs, kol);
+
+        //jika ada baris yang berisi nol semua return false
+        //jika tidak return true
+        for (int i = 0; i < brs; i++) {
+            zero = true;
+            for (int j = 0; j < kol; j++) {
+                if (tempM[i][j] != 0) {
+                    zero = false;
+                }
+            }
+            if (zero) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //mengubah M menjadi inversenya
+    //jika inverse tidak ada, M tidak berubah dan print warning
+    static void Inverse(double[][] M, int n) {
+        //Terminasi jika inverse tidak ada
+        if (!InverseExist(M, n, n)) {
+            System.out.println("Inverse doesn't exist");
+            return;
+        }
+
+        //menggabungkan matriks dengan matriks identitas
+        double[][] extM = new double[n][n*2];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                extM[i][j] = M[i][j];
+            }
+            extM[i][n+i] = 1;
+        }
+        
+        //dijadikan RREF
+        RREF(extM, n, n*2);
+
+        //Mengubah M menjadi inversenya (ruas kanan extM)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                M[i][j] = extM[i][n+j];
+            }
+        }
+        
+    }
+
+
+    // ** SPL METODE MATRIKS BALIKAN ** //
+
+    static void SPLInverse(double[][] M, int brs, int kol) {
+        double[][] MA = new double[brs][kol-1];
+        double[] Mb = new double[brs];
+
+        //mengisi matriks A dengan koefisien SPL dan
+        //mengisi matriks b dengan konstanta
+        CopyMatrix(M, MA, brs, kol-1);
+        for (int i = 0; i < brs; i++) {
+            Mb[i] = M[i][kol-1];
+        }
+
+        //terminasi jika matriks A tidak memiliki inverse
+        if (!InverseExist(MA, brs, kol-1)) {
+            System.out.println("Matriks tidak memiliki inverse");
+            return;
+        }
+
+        //menginverse matriks A
+        Inverse(MA, brs);
+
+        //menghitung hasil perkalian matriks inverse A dengan matriks b
+        double[] result = new double[brs];
+        for (int i = 0; i < brs; i++) {
+            for (int j = 0; j < kol-1; j++) {
+                result[i] += (MA[i][j] * Mb[j]);
+            }
+        }
+
+        //output hasil
+        for (int i = 0; i < brs; i++) {
+            System.out.println("x" + (i+1) + " = " + result[i]);
+        }
+
+    }
+
+
+    // ** DORAIFAA / DRIVER ** //
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        Matriks Matrix = new Matriks();
+        int M = in.nextInt();
+        int N = in.nextInt();
+        Matrix.IsiMatriks(M, N);
+
+        // * Insert Function Here * //
+        //SPLInverse(Matrix.Mat, Matrix.baris, Matrix.kolom);
+        //RREF(Matrix.Mat, Matrix.baris, Matrix.kolom);
+
+        Matrix.TulisMatriks();
+        
+        in.close();
+    }
+
+
+/*
+    void eselon(int M, int N, boolean isForDeterminant){
+        //sebelum mulai, dilihat dulu apakah fungsi ini digunakan untuk menghitung determinan atau tidak
+        if (isForDeterminant){
+            M = this.baris;
+            N = this.kolom;
+        }
+        //pengecekan apakah perlu Tukar menukar
+        int[] note = new int[M];
+        //isi array note dengan 999
+        for (int i = 0; i < M; i++){
+            note[i] = 999;
+        }
+        //mencatat kemunculan elemen non 0 di Matriks utama
+        int a=0;
+        int b=0;
+        boolean firstTime=true;
+        while (a<M){
+            b=0;
+            while (b<N){
+                if (this.Mat[a][b]!=0 && firstTime){
+                    note[a]=b;
+                    firstTime=false;
+                }
+                b++;
+            }
+            a++;
+            firstTime=true;
+        }
+        //mengecek apakah elemen non 0 yg pertama muncul sudah terurut. jika tidak, maka diperlukan Tukar menukar baris
+        boolean isSorted=true;
+        int temp=note[0];
+        //cek apakah terurut menaik
+        for (int i=1; i<M && isSorted;i++){
+            if (note[i]<temp){
+                isSorted=false;
+            }
+            temp=note[i];
+        }
+        
+        if (!isSorted){ //jika tidak terurut, maka harus Tukar menukar
+            for (int i=0;i<M-1;i++){
+                for (int j=i+1;j<M;j++){
+                    if (note[i]>note[j]){
+                        temp=note[i];
+                        note[i]=note[j];
+                        note[j]=temp;
+                        this.Tukar(i,j);
+                        this.determinant*=(-1);
+                    }
+                }
+            }
+        }
+        //lakukan operasi-operasi
+        int eselonOrder=0;
+        double operand;
+        int i=0;
+        //Matriks yg berada di kolom eselonOrder harus 1
+        this.EchelonBeOne(M,N);
+        //semua sudah terurut dan urutan eselon sudah seharusnya.
+        //sekarang, memastikan yg berada di bawah dan atas itu 0
+        //karena saya mager, jadi ini adalah barisan kode untuk memastikan yg bawah saja yg 0 dulu
+        eselonOrder= this.findEselonAt(0); //mencari elemen 1 pada kolom keberapa di suatu baris
+        int acuanBaris=0;
+        i=1;
+        boolean done=false;
+        while(i<M && !done){
+            if (this.Mat[i][eselonOrder]!=0){
+                if (this.Mat[i][eselonOrder]>0 && this.Mat[acuanBaris][eselonOrder]>0){
+                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
+                }
+                else if (this.Mat[i][eselonOrder]<0 && this.Mat[acuanBaris][eselonOrder]>0){
+                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
+                }
+                else if (this.Mat[i][eselonOrder]>0 & this.Mat[acuanBaris][eselonOrder]<0){
+                    this.OperasiThdBaris(i,eselonOrder,((this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
+                }
+                else{
+                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
+                }
+            }
+            if (eselonOrder==N-1 && i==M-1){
+                done=true;
+            }
+            if (i==M-1){
+                this.EchelonBeOne(M,N);
+                eselonOrder=this.findEselonAt(acuanBaris+1);
+                acuanBaris++;
+                i=acuanBaris+1;
+            }
+            else{
+                i++;
+            }
+        }
+        //sekarang memastikan atasnya itu 0
+        eselonOrder= this.findEselonAt(1); //mencari elemen 1 pada kolom keberapa di suatu baris
+        acuanBaris=1;
+        i=acuanBaris-1;
+        done=false;
+        while(!done){
+            if (this.Mat[i][eselonOrder]!=0){
+                if (this.Mat[i][eselonOrder]>0 && this.Mat[acuanBaris][eselonOrder]>0){
+                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
+                }
+                else if (this.Mat[i][eselonOrder]<0 && this.Mat[acuanBaris][eselonOrder]>0){
+                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
+                }
+                else if (this.Mat[i][eselonOrder]>0 & this.Mat[acuanBaris][eselonOrder]<0){
+                    this.OperasiThdBaris(i,eselonOrder,((this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
+                }
+                else{
+                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
+                }
+            }
+            if (eselonOrder==N-1 && i<=0){
+                done=true;
+            }
+            else if (i==0){
+                this.EchelonBeOne(M,N);
+                eselonOrder=this.findEselonAt(acuanBaris+1);
+                acuanBaris++;
+                i=acuanBaris-1;
+            }
+            else{
+                i--;
+            }
+        }
+        System.out.println();
+        this.TulisMatriks();
+        System.out.println();
+        System.out.println("determinan : "+this.determinant);
+    }
+
+*/
+
+}
