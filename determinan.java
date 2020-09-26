@@ -1,26 +1,8 @@
 public class determinan {
-    // ** FUNKY ** //
-    //tukar 2 baris
-    static void tukar(double[][] M, int kolom, int baris1, int baris2) {
-        double temp;
-        for (int k = 0; k < kolom; k++) {
-            temp = M[baris1][k];
-            M[baris1][k] = M[baris2][k];
-            M[baris2][k] = temp;
-        }
-    }
-
-    //operasi antara 2 baris
-    static void operasiThdBaris(double[][] M, int kolom, int barisTarget, int barisOperator, double faktor) {
-        for (int k = 0; k < kolom; k++) {
-            M[barisTarget][k] -= (M[barisOperator][k] * faktor);
-        }
-    }
-
-    // ** Mencari Determinan ** //
+    // ** DETERMINANT MATRIX ** //
 
     // Metode OBE //
-    static double determinant(double[][] M, int baris, int kolom) {
+    static double determinant1(double[][] M, int baris, int kolom) {
         double det = 1;
 
         for (int i = 0; i < baris; i++) {
@@ -38,15 +20,15 @@ public class determinan {
                     return 0;
                 }
 
-                //tukar baris
+                //Tukar baris
                 det *= -1;
-                tukar(M, kolom, i, i+c);
+                Matriks.Tukar(M, kolom, i, i+c);
             }
             
             //mengurangi baris sesuai faktor
             for (int j = i+1; j < baris; j++) {
                 double operand = M[j][i] / M[i][i];
-                operasiThdBaris(M, kolom, j, i, operand);
+                Matriks.OperasiThdBaris(M, kolom, j, i, operand);
             }
             //mengalikan diagonal
             det *= M[i][i];
@@ -100,4 +82,5 @@ public class determinan {
 
         return det;
     }
+
 }
