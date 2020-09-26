@@ -9,4 +9,7 @@ Including :
 * Constructor/Method Matrix
 
 Script lain hanya untuk memudahkan mencari/membaca/checklist.
+
+Also still need some more testing. All tests that have been done is tested through Matriks.java.
+
 <p>- Iqbal 26/9/20 10:50pm</p>
