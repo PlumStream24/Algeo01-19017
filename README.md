@@ -10,6 +10,10 @@ Including :
 
 Script lain hanya untuk memudahkan mencari/membaca/checklist.
 
-Also still need some more testing. All tests that have been done is tested through Matriks.java.
+P.S. Still need some more testing. All tests that have been done is tested through Matriks.java.
+
+P.S.S. Here's a pic of Fuhrer as an encouragement to work.
+
+![Fuhrer] (https://vignette.wikia.nocookie.net/megamitensei/images/4/48/Fuhrer.png)
 
 <p>- Iqbal 26/9/20 10:50pm</p>
