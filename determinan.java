@@ -2,33 +2,33 @@ public class determinan {
     // ** DETERMINANT MATRIX ** //
 
     // Metode OBE //
-    static double determinant1(double[][] M, int baris, int kolom) {
+    static double determinant1(double[][] M, int n) {
         double det = 1;
 
-        for (int i = 0; i < baris; i++) {
+        for (int i = 0; i < n; i++) {
             //cek jika diagonal adalah 0,
             //jika 0, ditukar dengan yang tidak 0
             if (M[i][i] == 0) {
                 int c = 1;
                 //mencari indeks baris di kolom i yang tidak 0
-                while ((i + c) < baris && M[i+c][i] == 0) {
+                while ((i + c) < n && M[i+c][i] == 0) {
                     c++;
                 }
 
                 //terminasi jika semua baris di kolom i 0
-                if ((i + c) == baris) {
+                if ((i + c) == n) {
                     return 0;
                 }
 
                 //Tukar baris
                 det *= -1;
-                Matriks.Tukar(M, kolom, i, i+c);
+                Matriks.Tukar(M, n, i, i+c);
             }
             
             //mengurangi baris sesuai faktor
-            for (int j = i+1; j < baris; j++) {
+            for (int j = i+1; j < n; j++) {
                 double operand = M[j][i] / M[i][i];
-                Matriks.OperasiThdBaris(M, kolom, j, i, operand);
+                Matriks.OperasiThdBaris(M, n, j, i, operand);
             }
             //mengalikan diagonal
             det *= M[i][i];
@@ -81,6 +81,49 @@ public class determinan {
         }
 
         return det;
+    }
+
+
+    // ** SPL METODE CRAMER ** //
+
+    //Mencari solusi spl menggunakan kaidah cramer
+    //jika determinan 0, maka tidak ada solusi unik
+    static void SPLCramer(double[][] M, int brs, int kol) {
+        double[][] MA = new double[brs][kol-1];
+        double[] Mb = new double[brs];
+        double[][] tempM = new double[brs][kol-1];
+        double det, tempDet;
+
+        //jika MA bukan matriks persegi, akan keluar
+        if (brs != (kol-1)) {
+            System.out.println("SPL tidak memiliki solusi unik");
+            return;
+        }
+
+        //mengisi matriks A dengan koefisien SPL dan b dengan konstanta
+        Matriks.CopyMatrix(M, MA, brs, kol-1);
+        for (int i = 0; i < brs; i++) {
+            Mb[i] = M[i][kol-1];
+        }
+
+        //mencari determinan dari matriks A, jika 0 akan keluar
+        det = determinant2(MA, brs);
+        if (det == 0) {
+            System.out.println("SPL tidak memiliki solusi unik");
+            return;
+        }
+
+        //mencari determinan tiap matriks yang telah disubstitusi,
+        //kemudian mengoutput jawaban dengan membaginya dengan determinan matriks A
+        for (int j = 0; j < kol-1; j++) {
+            Matriks.CopyMatrix(MA, tempM, brs, kol-1);
+            for (int i = 0; i < brs; i++) {
+                tempM[i][j] = Mb[i];
+            }
+            tempDet = determinant1(tempM, brs);
+            System.out.println("x" + (j+1) + " = " + (tempDet/det));
+        }
+
     }
 
 }
