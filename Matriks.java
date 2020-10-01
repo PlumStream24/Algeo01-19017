@@ -9,6 +9,7 @@ class Matriks {
     int mark = -999;
 
     static Scanner in = new Scanner(System.in);
+    static String filename;
 
     // ** CONSTRUCTOR ** //
     Matriks() {
@@ -656,7 +657,7 @@ class Matriks {
         }
         
     }
-    
+
     //mengubah matriks menjadi transposenya
     static void Transpose(double[][] M, int n) {
         for (int i = 0; i < n-1; i++) {
@@ -971,29 +972,27 @@ class Matriks {
         }*/
     }
 
+    static void FilenameInput(boolean first) throws Exception{
+        System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+        if (first){
+            String input=in.nextLine();
+        }
+        filename=in.nextLine();
+    }
+
     // ** DORAIFAA / DRIVER ** //
     public static void main(String[] args) throws Exception {
         //MENU
         int choice,choice2;
         Matriks Matrix = new Matriks();
-        String currentDir = System.getProperty("user.dir");
+        System.out.println("!!WARNING!!\nKarena error yang belum bisa diselesaikan, maka input nama file (jika input melalui file) akan dilakukan diawal.");
+        FilenameInput(false);
+        // filename="test.txt";
         while (true){
-            System.out.println("MENU");
-            System.out.println("1.Sistem Persamaaan Linier");
-            System.out.println("2.Determinan");
-            System.out.println("3.Matriks balikan");
-            System.out.println("4.Interpolasi Polinom");
-            System.out.println("5.Regresi linier berganda");
-            System.out.println("6.Keluar");
-            System.out.print("Masukkan pilihan anda (berupa nomor) : ");
+            System.out.print("MENU\n1.Sistem Persamaaan Linier\n2.Determinan\n3.Matriks balikan\n4.Interpolasi Polinom\n5.Regresi linier berganda\n6.Ganti nama file\n7.Keluar\nMasukkan pilihan anda (berupa nomor) : ");
             choice=in.nextInt();
             if (choice==1){
-                System.out.println("\nPilihan Metode SPL");
-                System.out.println("1.Metode eliminasi Gauss");
-                System.out.println("2.Metode eliminasi Gauss-Jordan");
-                System.out.println("3.Metode matriks balikan");
-                System.out.println("4.Kaidah Cramer");
-                System.out.print("Masukkan pilihan anda (berupa nomor) : ");
+                System.out.print("\nPilihan Metode SPL\n1.Metode eliminasi Gauss\n2.Metode eliminasi Gauss-Jordan\n3.Metode matriks balikan\n4.Kaidah Cramer\nMasukkan pilihan anda (berupa nomor) : ");
                 choice=in.nextInt();
                 System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
                 choice2=in.nextInt();
@@ -1009,40 +1008,44 @@ class Matriks {
                     int N;
                     String data;
                     String[] dataParts;
-                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    String filename=in.nextLine();
+                    String currentDir = System.getProperty("user.dir");
+                    // System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    // String filename=in.nextLine();
+                    // String filename="test.txt";
                     File file= new File(currentDir+"/"+filename);
-                    Scanner sc = new Scanner(file);
-                    while (sc.hasNextLine()){
-                        data=sc.nextLine();
+                    in=new Scanner(file);
+                    while (in.hasNextLine()){
+                        data=in.nextLine();
                         dataParts=data.split(" ");
                         N= dataParts.length;
                         Matrix.IsiMatriksFile(i,N,dataParts);
                         i++;
                     }
+                    in= new Scanner(System.in);
                 }
                 switch(choice){
                     case 1 :
                         REF(Matrix.Mat, Matrix.baris, Matrix.kolom);
                         PrintEchelonREFAnswer(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        System.out.println();
                         break;
                     case 2 :
                         RREF(Matrix.Mat, Matrix.baris, Matrix.kolom);
                         PrintEchelonAnswer(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        System.out.println();
                         break;
                     case 3 :
                         SPLInverse(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        System.out.println();
                         break;
                     case 4 :
                         SPLCramer(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        System.out.println();
                         break;
                 }
             }
             else if(choice==2){
-                System.out.println("\nPilihan Metode Determinan");
-                System.out.println("1.Metode reduksi baris");
-                System.out.println("2.Metode ekspansi kofaktor");
-                System.out.print("Masukkan pilihan anda (berupa nomor) : ");
+                System.out.print("\nPilihan Metode Determinan\n1.Metode reduksi baris\n2.Metode ekspansi kofaktor\nMasukkan pilihan anda (berupa nomor) : ");
                 choice=in.nextInt();
                 System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
                 choice2=in.nextInt();
@@ -1058,8 +1061,9 @@ class Matriks {
                     int N;
                     String data;
                     String[] dataParts;
-                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    String filename=in.nextLine();
+                    String currentDir = System.getProperty("user.dir");
+                    // System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    // String filename=in.nextLine();
                     File file= new File(currentDir+"/"+filename);
                     Scanner sc = new Scanner(file);
                     while (sc.hasNextLine()){
@@ -1069,24 +1073,24 @@ class Matriks {
                         Matrix.IsiMatriksFile(i,N,dataParts);
                         i++;
                     }
+                    in= new Scanner(System.in);
                 }
                 double hasil;
                 switch(choice){
                     case 1 :
                         hasil = determinant1(Matrix.Mat,Matrix.kolom);
                         System.out.println("Determinan = "+ hasil);
+                        System.out.println();
                         break;
                     case 2 :
                         hasil = determinant2(Matrix.Mat,Matrix.kolom);
                         System.out.println("Determinan = "+ hasil);
+                        System.out.println();
                         break;
                 }
             }
             else if (choice==3){
-                System.out.println("\nPilihan Metode Invers");
-                System.out.println("1.Metode reduksi baris");
-                System.out.println("2.Metode adjoin");
-                System.out.print("Masukkan pilihan anda (berupa nomor) : ");
+                System.out.print("\nPilihan Metode Invers\n1.Metode reduksi baris\n2.Metode adjoin\nMasukkan pilihan anda (berupa nomor) : ");
                 choice=in.nextInt();
                 System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
                 choice2=in.nextInt();
@@ -1103,8 +1107,9 @@ class Matriks {
                     int N;
                     String data;
                     String[] dataParts;
-                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    String filename=in.nextLine();
+                    String currentDir = System.getProperty("user.dir");
+                    // System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    // String filename=in.nextLine();
                     File file= new File(currentDir+"/"+filename);
                     Scanner sc = new Scanner(file);
                     while (sc.hasNextLine()){
@@ -1114,15 +1119,18 @@ class Matriks {
                         Matrix.IsiMatriksFile(i,N,dataParts);
                         i++;
                     }
+                    in= new Scanner(System.in);
                 }
                 switch(choice){
                     case 1:
                         Inverse(Matrix.Mat,Matrix.baris);
                         Matrix.TulisMatriks();
+                        System.out.println();
                         break;
                     case 2:
                         Inverse2(Matrix.Mat,Matrix.baris);
                         Matrix.TulisMatriks();
+                        System.out.println();
                         break;
                 }
             }
@@ -1142,9 +1150,10 @@ class Matriks {
                     int Kol;
                     String data;
                     String[] dataParts;
+                    String currentDir = System.getProperty("user.dir");
                     boolean firstTime=true;
-                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    String filename=in.nextLine();
+                    // System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    // String filename=in.nextLine();
                     File file= new File(currentDir+"/"+filename);
                     Scanner sc = new Scanner(file);
                     while (sc.hasNextLine()){
@@ -1161,8 +1170,10 @@ class Matriks {
                             i++;
                         }
                     }
+                    in= new Scanner(System.in);
                 }
                 Interpolasi(Matrix.Mat, Matrix.baris, Matrix.kolom, N);
+                System.out.println();
             }
             else if (choice==5){
                 System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
@@ -1186,9 +1197,10 @@ class Matriks {
                     int Kol;
                     String data;
                     String[] dataParts;
+                    String currentDir = System.getProperty("user.dir");
                     boolean firstTime=true;
-                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    String filename=in.nextLine();
+                    // System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    // String filename=in.nextLine();
                     File file= new File(currentDir+"/"+filename);
                     Scanner sc = new Scanner(file);
                     while (sc.hasNextLine()){
@@ -1205,43 +1217,20 @@ class Matriks {
                             i++;
                         }
                     }
+                    in= new Scanner(System.in);
                 }
                 regresi(Matrix.Mat, Matrix.baris, Matrix.kolom, N);
+                System.out.println();
 
             }
-            else if (choice==6){
+            else if (choice==7){
                 break;
             }
-            else if (choice>6){
-                System.out.println("Tolong masukan input yang benar.\n");
+            else if(choice==6){
+                FilenameInput(true);
             }
-            else{
-                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
-                choice2=in.nextInt();
-                if (choice2==1){
-                    System.out.print("\nMasukkan jumlah baris : ");
-                    int M = in.nextInt();
-                    System.out.print("Masukkan jumlah kolom : ");
-                    int N = in.nextInt();
-                    Matrix.IsiMatriks(M, N);
-                }
-                else{
-                    int i=0;
-                    int N;
-                    String data;
-                    String[] dataParts;
-                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    String filename=in.nextLine();
-                    File file= new File(currentDir+"/"+filename);
-                    Scanner sc = new Scanner(file);
-                    while (sc.hasNextLine()){
-                        data=sc.nextLine();
-                        dataParts=data.split(" ");
-                        N= dataParts.length;
-                        Matrix.IsiMatriksFile(i,N,dataParts);
-                        i++;
-                    }
-                }
+            else {
+                System.out.println("Tolong masukan input yang benar.\n");
             }
 
         }
