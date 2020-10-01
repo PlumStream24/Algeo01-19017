@@ -528,14 +528,14 @@ class Matriks {
 
     //Menghitung determinan dari kofaktor yang didapat
     //n : dimensi matrix max[][]
-    static double determinant2(double mat[][], int n) throws Exception{
+    static double determinant2(double[][] M, int n) throws Exception{
         double det = 0;
         int sign = 1;
 
         //Basis
         //jika dimensi 1, akan mereturn indeks [0][0] pada matriks
         if (n == 1) {
-            return mat[0][0];
+            return M[0][0];
         }
         
         //declare matriks untuk kofaktor
@@ -544,8 +544,8 @@ class Matriks {
         //Rekurens
         //mengalikan baris 0 ke kofaktornya
         for (int k = 0; k < n; k++) {
-            getMatrixCofactor(mat, temp, 0, k, n);
-            det += sign * mat[0][k] * determinant2(temp, n-1);
+            getMatrixCofactor(M, temp, 0, k, n);
+            det += sign * M[0][k] * determinant2(temp, n-1);
 
             sign = -sign;
         }
