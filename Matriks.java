@@ -1,5 +1,5 @@
 import java.util.*;
-import java.io.File; 
+import java.io.*; 
 
 class Matriks {
     //atribut
@@ -10,6 +10,7 @@ class Matriks {
 
     static Scanner in = new Scanner(System.in);
     static String filename;
+    static String currentDir = System.getProperty("user.dir");
 
     // ** CONSTRUCTOR ** //
     Matriks() {
@@ -26,7 +27,8 @@ class Matriks {
     // ** METHOD ** //
     
     //Isi elemen matriks sesuai M dan N
-    void IsiMatriks(int M, int N) {
+    void IsiMatriks(int M, int N) throws Exception{
+        print("Masukkan elemen-elemen matriks : \n");
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
                 this.Mat[i][j] = in.nextInt();
@@ -62,14 +64,14 @@ class Matriks {
     }
 
     //Print matriks ke layar
-    void TulisMatriks() {
+    void TulisMatriks() throws Exception{
         for (int i = 0; i < this.baris; i++) {
             for (int j = 0; j < this.kolom; j++) {
                 if (this.Mat[i][j] != this.mark) {
-                    System.out.print(this.Mat[i][j] + " ");
+                    print(this.Mat[i][j] + " ");
                 }
             }
-            System.out.println();
+            print("\n");
         }
     }
 
@@ -157,7 +159,7 @@ class Matriks {
             if (c != 0) {
                 Tukar(M, kol, i, i+c);
             }
-
+            if (k == kol) break;
             //mengurangi baris sesuai faktor
             for (int j = 0; j < brs; j++) {
                 if (i != j ) {
@@ -261,7 +263,7 @@ class Matriks {
         }
     }
 
-    static void PrintEchelonREFAnswer(double[][] M, int brs, int kol){
+    static void PrintEchelonREFAnswer(double[][] M, int brs, int kol) throws Exception{
         double[] pivotValue = new double[kol-1];
         boolean pivot, leadingOneFound;
         int leadingOneIdx = 0;
@@ -278,7 +280,7 @@ class Matriks {
 
         //jika tidak ada solusi, akan berhenti
         if (CheckForNoSolution(M, brs, kol)) {
-            System.out.println("No Solution");
+            print("No Solution\n");
             return;
         }
 
@@ -347,13 +349,13 @@ class Matriks {
         for (int hitler=0;hitler<kol-1;hitler++){
             //printing the valid solution/unique solution
             if (solutionIsDefineable[hitler]){
-                System.out.println("x"+(hitler+1)+" = "+solution[hitler]);
+                print("x"+(hitler+1)+" = "+solution[hitler]+"\n");
             }
         }
         //printing the not so unique solutions
         for (int hitler=0;hitler<kol-1;hitler++){
             if (unknownSolution[hitler]!=""){
-                System.out.println(unknownSolution[hitler]);
+                print(unknownSolution[hitler]+"\n");
             }
         }
     }
@@ -378,7 +380,7 @@ class Matriks {
 
     //Mengisi array yang berisi solusi untuk pivot.
     //Jika baris bukan pivot, array akan diisi -999
-    static void FillPivotSolution(double[][] M, double[] arr, int brs, int kol) {
+    static void FillPivotSolution(double[][] M, double[] arr, int brs, int kol) throws Exception{
         boolean pivot, leadingOneFound;
         int leadingOneIdx = 0;
 
@@ -410,14 +412,14 @@ class Matriks {
     }
 
     //mengoutput jawaban dari eselon reduksi
-    static void PrintEchelonAnswer(double[][] M, int brs, int kol) {
+    static void PrintEchelonAnswer(double[][] M, int brs, int kol) throws Exception{
         double[] pivotValue = new double[kol-1];
         boolean pivot, leadingOneFound;
         int leadingOneIdx = 0;
 
         //jika tidak ada solusi, akan berhenti
         if (CheckForNoSolution(M, brs, kol)) {
-            System.out.println("No Solution");
+            print("No Solution\n");
             return;
         }
 
@@ -447,21 +449,21 @@ class Matriks {
             //jika baris pivot akan output solusi uniknya
             //jika bukan, akan menggunakan parametrik
             if (pivot) {
-                System.out.println("x" + (i+1) + " = "  + pivotValue[i]);
+                print("x" + (i+1) + " = "  + pivotValue[i]+"\n");
             } else {
-                System.out.print("x" + (i+1) + " = ");
+                print("x" + (i+1) + " = ");
                 for (int k = leadingOneIdx + 1; k < kol - 1; k++) {
                     if (M[i][k] != 0) {
                         if (pivotValue[k] == 0) {
                             continue;
                         } else if (pivotValue[k] != -999) {
-                            System.out.print(-1*M[i][k]*pivotValue[k] + " + ");
+                            print(-1*M[i][k]*pivotValue[k] + " + ");
                         } else {
-                            System.out.print(-1*M[i][k] + "x" + (k+1) + " + ");
+                            print(-1*M[i][k] + "x" + (k+1) + " + ");
                         }
                     }
                 }
-                System.out.println(M[i][kol-1]);
+                print(M[i][kol-1]+"\n");
             }
         }
     }
@@ -470,7 +472,7 @@ class Matriks {
     // ** DETERMINANT MATRIX ** //
 
     // Metode OBE //
-    static double determinant1(double[][] M, int n) {
+    static double determinant1(double[][] M, int n) throws Exception{
         double det = 1;
 
         for (int i = 0; i < n; i++) {
@@ -507,7 +509,7 @@ class Matriks {
     // Metode Kofaktor //
     //Mendapatkan matriks kofaktor dari baris p dan kolom q pada mat[][]
     //n: dimensi matrix mat[][]
-    static void getMatrixCofactor(double mat[][], double temp[][], int p, int q, int n) {
+    static void getMatrixCofactor(double mat[][], double temp[][], int p, int q, int n) throws Exception{
         int i = 0, j = 0;
         for (int brs = 0; brs < n; brs++) {
             for (int kol = 0; kol < n; kol++) {
@@ -526,7 +528,7 @@ class Matriks {
 
     //Menghitung determinan dari kofaktor yang didapat
     //n : dimensi matrix max[][]
-    static double determinant2(double mat[][], int n) {
+    static double determinant2(double mat[][], int n) throws Exception{
         double det = 0;
         int sign = 1;
 
@@ -556,7 +558,7 @@ class Matriks {
 
     //Mencari solusi spl menggunakan kaidah cramer
     //jika determinan 0, maka tidak ada solusi unik
-    static void SPLCramer(double[][] M, int brs, int kol) {
+    static void SPLCramer(double[][] M, int brs, int kol) throws Exception{
         double[][] MA = new double[brs][kol-1];
         double[] Mb = new double[brs];
         double[][] tempM = new double[brs][kol-1];
@@ -564,7 +566,7 @@ class Matriks {
 
         //jika MA bukan matriks persegi, akan keluar
         if (brs != (kol-1)) {
-            System.out.println("SPL tidak memiliki solusi unik");
+            print("SPL tidak memiliki solusi unik\n");
             return;
         }
 
@@ -577,7 +579,7 @@ class Matriks {
         //mencari determinan dari matriks A, jika 0 akan keluar
         det = determinant2(MA, brs);
         if (det == 0) {
-            System.out.println("SPL tidak memiliki solusi unik");
+            print("SPL tidak memiliki solusi unik\n");
             return;
         }
 
@@ -589,7 +591,7 @@ class Matriks {
                 tempM[i][j] = Mb[i];
             }
             tempDet = determinant1(tempM, brs);
-            System.out.println("x" + (j+1) + " = " + (tempDet/det));
+            print("x" + (j+1) + " = " + (tempDet/det)+"\n");
         }
 
     }
@@ -599,7 +601,7 @@ class Matriks {
     
     //mencari apakah matriks memiliki inverse atau tidak
     //true untuk ada, dan false untuk tidak
-    static boolean InverseExist(double[][] M, int brs, int kol) {
+    static boolean InverseExist(double[][] M, int brs, int kol) throws Exception{
         boolean zero; 
         double[][] tempM = new double[brs][kol];
 
@@ -630,10 +632,10 @@ class Matriks {
 
     //mengubah M menjadi inversenya
     //jika inverse tidak ada, M tidak berubah dan print warning
-    static void Inverse(double[][] M, int n) {
+    static void Inverse(double[][] M, int n) throws Exception{
         //Terminasi jika inverse tidak ada
         if (!InverseExist(M, n, n)) {
-            System.out.println("Inverse doesn't exist");
+            print("Inverse doesn't exist\n");
             return;
         }
 
@@ -659,7 +661,7 @@ class Matriks {
     }
 
     //mengubah matriks menjadi transposenya
-    static void Transpose(double[][] M, int n) {
+    static void Transpose(double[][] M, int n) throws Exception{
         for (int i = 0; i < n-1; i++) {
             for (int j = i+1; j < n; j++) {
                 double temp = M[i][j];
@@ -669,11 +671,16 @@ class Matriks {
         }
     }
 
-    static void Inverse2(double[][] M, int n) {
+    static void Inverse2(double[][] M, int n) throws Exception{
         double[][] adjM = new double[n][n];
         double det = determinant2(M, n);
         double[][] tempM = new double[n-1][n-1];
         
+        if (det == 0) {
+            System.out.println("Inverse doesn't exist");
+            return;
+        }
+
         //mengisi matriks kofaktor dengan cara mencari determinan kofaktor i j
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -697,7 +704,7 @@ class Matriks {
 
     // ** SPL METODE MATRIKS BALIKAN ** //
 
-    static void SPLInverse(double[][] M, int brs, int kol) {
+    static void SPLInverse(double[][] M, int brs, int kol) throws Exception{
         double[][] MA = new double[brs][kol-1];
         double[] Mb = new double[brs];
 
@@ -710,7 +717,7 @@ class Matriks {
 
         //terminasi jika matriks A tidak memiliki inverse
         if (!InverseExist(MA, brs, kol-1)) {
-            System.out.println("Matriks tidak memiliki inverse");
+            print("Matriks tidak memiliki inverse\n");
             return;
         }
 
@@ -727,42 +734,42 @@ class Matriks {
 
         //output hasil
         for (int i = 0; i < brs; i++) {
-            System.out.println("x" + (i+1) + " = " + result[i]);
+            print("x" + (i+1) + " = " + result[i]+"\n");
         }
 
     }
 
     // ** INTERPOLASI MY ASS ** //
     
-    static void Interpolasi(double[][] M, int brs, int kol, double taksir) {
+    static void Interpolasi(double[][] M, int brs, int kol, double taksir) throws Exception{
         double hasilTaksir = 0;
         
         //mendapatkan solusi SPL
         RREF(M, brs, kol);
 
         //mengoutput fungsi
-        System.out.print("p" + (brs-1) + "(x) = " + M[0][kol-1] + " + ");
+        print("p" + (brs-1) + "(x) = " + M[0][kol-1] + " + ");
         for (int i = 1; i < brs; i++) {
             if (i == brs-1) {
-                System.out.print(M[i][kol-1] + "x^" + (brs-1));
+                print(M[i][kol-1] + "x^" + (brs-1));
             } else if (i == 1) {
-                System.out.print(M[i][kol-1] + "x + ");
+                print(M[i][kol-1] + "x + ");
             } else {
-                System.out.print(M[i][kol-1] + "x^" + i + " + ");
+                print(M[i][kol-1] + "x^" + i + " + ");
             }
         }
-        System.out.println();
+        print("\n");
 
         //menghitung taksiran kemudian menghoutputnya
         for (int i = 0; i < brs; i++) {
             hasilTaksir += M[i][kol-1] * Math.pow(taksir, i);
         }
-        System.out.println(hasilTaksir);
+        print(hasilTaksir+"\n");
     }
 
     //regresion-borne
     //shit's fucked my guy, (me) too stupid for this
-    static void REFRegresi(double[][] M, int brs, int kol, double randomx) {
+    static void REFRegresi(double[][] M, int brs, int kol, double randomx) throws Exception{
         int k = 0;
         int c = 0;
         //double det = 1;
@@ -804,7 +811,7 @@ class Matriks {
         PrintEchelonREFAnswerRegresi(M, brs, kol,randomx);
     }
     
-    static void PrintEchelonREFAnswerRegresi(double[][] M, int brs, int kol, double randomx){
+    static void PrintEchelonREFAnswerRegresi(double[][] M, int brs, int kol, double randomx) throws Exception{
         double[] pivotValue = new double[kol-1];
         boolean pivot, leadingOneFound;
         int leadingOneIdx = 0;
@@ -821,7 +828,7 @@ class Matriks {
 
         //jika tidak ada solusi, akan berhenti
         if (CheckForNoSolution(M, brs, kol)) {
-            System.out.println("No Solution");
+            print("No Solution\n");
             return;
         }
 
@@ -887,7 +894,7 @@ class Matriks {
         }
 
         //Printing the solutions
-        System.out.print("yi = ");
+        print("yi = ");
         double KEKKA = 0;
         for (int hitler=0;hitler<kol-1;hitler++){
             //printing the valid solution/unique solution
@@ -899,25 +906,25 @@ class Matriks {
                 else {
                     KEKKA += randomx*solution[hitler];
                     if (solution[hitler]<0){
-                        System.out.print(" - "+-1*solution[hitler]+"x"+hitler+"i");
+                        print(" - "+-1*solution[hitler]+"x"+hitler+"i");
                     }
                     else{
-                        System.out.print(" + "+solution[hitler]+"x"+hitler+"i");
+                        print(" + "+solution[hitler]+"x"+hitler+"i");
                     }
                 }
             }
         }
-        System.out.println(" + ε");
-        System.out.println("Taksiran "+randomx+" adalah "+KEKKA+" + ε");
+        print(" + ε\n");
+        print("Taksiran "+randomx+" adalah "+KEKKA+" + ε\n");
         //printing the not so unique solutions
         for (int hitler=0;hitler<kol-1;hitler++){
             if (unknownSolution[hitler]!=""){
-                System.out.println("nope.avi");
+                print("nope.avi\n");
             }
         }
     }
 
-    static void regresi(double[][] M, int brs, int kol, double randomx){
+    static void regresi(double[][] M, int brs, int kol, double randomx) throws Exception{
         int kolA = kol+1;
         double[][] funky = new double[kol][kolA];
         for (int i = 0;i<kol;i++){
@@ -973,11 +980,23 @@ class Matriks {
     }
 
     static void FilenameInput(boolean first) throws Exception{
-        System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+        print("Nama file txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : \n");
         if (first){
             String input=in.nextLine();
         }
         filename=in.nextLine();
+    }
+
+    static void print(String obj) throws Exception{
+        PrintStream fileOutput = new PrintStream(new FileOutputStream(currentDir+"/log.txt",true)); 
+        PrintStream console = System.out; 
+
+        System.setOut(fileOutput); 
+        System.out.print(obj); 
+  
+
+        System.setOut(console); 
+        System.out.print(obj); 
     }
 
     // ** DORAIFAA / DRIVER ** //
@@ -985,21 +1004,22 @@ class Matriks {
         //MENU
         int choice,choice2;
         Matriks Matrix = new Matriks();
-        System.out.println("!!WARNING!!\nKarena error yang belum bisa diselesaikan, maka input nama file (jika input melalui file) akan dilakukan diawal.");
+        print("!!WARNING!!\nKarena error yang belum bisa diselesaikan, maka input nama file (jika input melalui file) akan dilakukan diawal.\n");
         FilenameInput(false);
         // filename="test.txt";
         while (true){
-            System.out.print("MENU\n1.Sistem Persamaaan Linier\n2.Determinan\n3.Matriks balikan\n4.Interpolasi Polinom\n5.Regresi linier berganda\n6.Ganti nama file\n7.Keluar\nMasukkan pilihan anda (berupa nomor) : ");
+            print("\n#####MENU#####\n1.Sistem Persamaaan Linier\n2.Determinan\n3.Matriks balikan\n4.Interpolasi Polinom\n5.Regresi linier berganda\n6.Ganti nama file\n7.Keluar\nMasukkan pilihan anda (berupa nomor) : \n");
             choice=in.nextInt();
             if (choice==1){
-                System.out.print("\nPilihan Metode SPL\n1.Metode eliminasi Gauss\n2.Metode eliminasi Gauss-Jordan\n3.Metode matriks balikan\n4.Kaidah Cramer\nMasukkan pilihan anda (berupa nomor) : ");
+                print("\n=====SISTEM PERSAMAAN LINIER=====\n");
+                print("Pilihan Metode SPL\n1.Metode eliminasi Gauss\n2.Metode eliminasi Gauss-Jordan\n3.Metode matriks balikan\n4.Kaidah Cramer\nMasukkan pilihan anda (berupa nomor) : \n");
                 choice=in.nextInt();
-                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : \n");
                 choice2=in.nextInt();
                 if (choice2==1){
-                    System.out.print("\nMasukkan jumlah baris : ");
+                    print("\nMasukkan jumlah baris : \n");
                     int M = in.nextInt();
-                    System.out.print("Masukkan jumlah kolom : ");
+                    print("Masukkan jumlah kolom : \n");
                     int N = in.nextInt();
                     Matrix.IsiMatriks(M, N);
                 }
@@ -1008,10 +1028,6 @@ class Matriks {
                     int N;
                     String data;
                     String[] dataParts;
-                    String currentDir = System.getProperty("user.dir");
-                    // System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    // String filename=in.nextLine();
-                    // String filename="test.txt";
                     File file= new File(currentDir+"/"+filename);
                     in=new Scanner(file);
                     while (in.hasNextLine()){
@@ -1025,34 +1041,47 @@ class Matriks {
                 }
                 switch(choice){
                     case 1 :
+                        print("[Metode eliminasi Gauss]\n");
+                        print("Matriks input : \n");
+                        Matrix.TulisMatriks();
                         REF(Matrix.Mat, Matrix.baris, Matrix.kolom);
                         PrintEchelonREFAnswer(Matrix.Mat, Matrix.baris, Matrix.kolom);
-                        System.out.println();
+                        print("\n");
                         break;
                     case 2 :
+                        print("[Metode eliminasi Gauss-jordan]\n");
+                        print("Matriks input : \n");
+                        Matrix.TulisMatriks();
                         RREF(Matrix.Mat, Matrix.baris, Matrix.kolom);
                         PrintEchelonAnswer(Matrix.Mat, Matrix.baris, Matrix.kolom);
-                        System.out.println();
+                        print("\n");
                         break;
                     case 3 :
+                        print("[Metode matriks balikan]\n");
+                        print("Matriks input : \n");
+                        Matrix.TulisMatriks();
                         SPLInverse(Matrix.Mat, Matrix.baris, Matrix.kolom);
-                        System.out.println();
+                        print("\n");
                         break;
                     case 4 :
+                        print("[Metode crammer]\n");
+                        print("Matriks input : \n");
+                        Matrix.TulisMatriks();
                         SPLCramer(Matrix.Mat, Matrix.baris, Matrix.kolom);
-                        System.out.println();
+                        print("\n");
                         break;
                 }
             }
             else if(choice==2){
-                System.out.print("\nPilihan Metode Determinan\n1.Metode reduksi baris\n2.Metode ekspansi kofaktor\nMasukkan pilihan anda (berupa nomor) : ");
+                print("\n=====DETERMINAN=====\n");
+                print("Pilihan Metode Determinan\n1.Metode reduksi baris\n2.Metode ekspansi kofaktor\nMasukkan pilihan anda (berupa nomor) : \n");
                 choice=in.nextInt();
-                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : \n");
                 choice2=in.nextInt();
                 if (choice2==1){
-                    System.out.print("\nMasukkan jumlah baris : ");
+                    print("\nMasukkan jumlah baris : \n");
                     int M = in.nextInt();
-                    System.out.print("Masukkan jumlah kolom : ");
+                    print("Masukkan jumlah kolom : \n");
                     int N = in.nextInt();
                     Matrix.IsiMatriks(M, N);
                 }
@@ -1061,9 +1090,6 @@ class Matriks {
                     int N;
                     String data;
                     String[] dataParts;
-                    String currentDir = System.getProperty("user.dir");
-                    // System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    // String filename=in.nextLine();
                     File file= new File(currentDir+"/"+filename);
                     Scanner sc = new Scanner(file);
                     while (sc.hasNextLine()){
@@ -1078,28 +1104,33 @@ class Matriks {
                 double hasil;
                 switch(choice){
                     case 1 :
+                        print("[Metode reduksi baris]\n");
+                        print("Matriks input : \n");
+                        Matrix.TulisMatriks();
                         hasil = determinant1(Matrix.Mat,Matrix.kolom);
-                        System.out.println("Determinan = "+ hasil);
-                        System.out.println();
+                        print("Determinan = "+ hasil+"\n");
                         break;
                     case 2 :
+                        print("[Metode ekspansi kofaktor]\n");
+                        print("Matriks input : \n");
+                        Matrix.TulisMatriks();
                         hasil = determinant2(Matrix.Mat,Matrix.kolom);
-                        System.out.println("Determinan = "+ hasil);
-                        System.out.println();
+                        print("Determinan = "+ hasil+"\n");
                         break;
                 }
             }
             else if (choice==3){
-                System.out.print("\nPilihan Metode Invers\n1.Metode reduksi baris\n2.Metode adjoin\nMasukkan pilihan anda (berupa nomor) : ");
+                print("\n=====MATRIKS BALIKAN/INVERS=====\n");
+                print("Pilihan Metode Invers\n1.Metode reduksi baris\n2.Metode adjoin\nMasukkan pilihan anda (berupa nomor) : ");
                 choice=in.nextInt();
-                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
                 choice2=in.nextInt();
                 if (choice2==1){
-                    System.out.print("\nMasukkan jumlah baris : ");
+                    print("\nMasukkan jumlah baris : \n");
                     int M = in.nextInt();
-                    System.out.print("Masukkan jumlah kolom : ");
+                    print("Masukkan jumlah kolom : \n");
                     int N = in.nextInt();
-                    System.out.println("Masukkan isi matriks : ");
+                    print("Masukkan isi matriks : \n");
                     Matrix.IsiMatriks(M, N);
                 }
                 else{
@@ -1107,9 +1138,6 @@ class Matriks {
                     int N;
                     String data;
                     String[] dataParts;
-                    String currentDir = System.getProperty("user.dir");
-                    // System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    // String filename=in.nextLine();
                     File file= new File(currentDir+"/"+filename);
                     Scanner sc = new Scanner(file);
                     while (sc.hasNextLine()){
@@ -1123,25 +1151,34 @@ class Matriks {
                 }
                 switch(choice){
                     case 1:
+                        print("[Metode reduksi baris]\n");
+                        print("Matriks input : \n");
+                        Matrix.TulisMatriks();
                         Inverse(Matrix.Mat,Matrix.baris);
+                        print("Matriks invers : \n");
                         Matrix.TulisMatriks();
                         System.out.println();
                         break;
                     case 2:
+                        print("[Metode adjoin]\n");
+                        print("Matriks input : \n");
+                        Matrix.TulisMatriks();
                         Inverse2(Matrix.Mat,Matrix.baris);
+                        print("Matriks invers : \n");
                         Matrix.TulisMatriks();
                         System.out.println();
                         break;
                 }
             }
             else if(choice==4){
-                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                print("\n=====INTERPOLASI POLINOM=====\n");
+                print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : \n");
                 choice=in.nextInt();
                 double N=0;
                 if (choice==1){
-                    System.out.print("\nMasukkan ukuran matriks (satu ukuran, mxm) : ");
+                    print("\nMasukkan ukuran matriks (satu ukuran, mxm) : \n");
                     int M = in.nextInt();
-                    System.out.print("Nilai x yang akan ditaksir? : ");
+                    print("Nilai x yang akan ditaksir? : \n");
                     N = in.nextDouble();
                     Matrix.IsiMatriksInterpolasi(M);
                 }
@@ -1150,10 +1187,7 @@ class Matriks {
                     int Kol;
                     String data;
                     String[] dataParts;
-                    String currentDir = System.getProperty("user.dir");
                     boolean firstTime=true;
-                    // System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    // String filename=in.nextLine();
                     File file= new File(currentDir+"/"+filename);
                     Scanner sc = new Scanner(file);
                     while (sc.hasNextLine()){
@@ -1176,20 +1210,21 @@ class Matriks {
                 System.out.println();
             }
             else if (choice==5){
-                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                print("\n=====REGRESI LINIER BERGANDA=====\n");
+                print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : \n");
                 choice=in.nextInt();
                 double N=0;
                 if (choice==1){
-                    System.out.println("\nMasukkan nilai xk yang akan ditaksir");
+                    print("\nMasukkan nilai xk yang akan ditaksir\n");
                     N = in.nextDouble();
-                    System.out.println("Masukkan jumlah n");
+                    print("Masukkan jumlah n\n");
                     int M = in.nextInt();
-                    System.out.println("Masukkan jumlah i");
+                    print("Masukkan jumlah i\n");
                     int O = in.nextInt();
-                    System.out.println("Masukkan datanya dalam format");
-                    System.out.println("(x11..xn1,y1)");
-                    System.out.println("(...........)");
-                    System.out.println("(x1i..xni,yi)");
+                    print("Masukkan datanya dalam format\n");
+                    print("(x11..xn1,y1)\n");
+                    print("(...........)\n");
+                    print("(x1i..xni,yi)\n");
                     Matrix.IsiMatriks(O,M+1);
                 }
                 else{
@@ -1197,10 +1232,7 @@ class Matriks {
                     int Kol;
                     String data;
                     String[] dataParts;
-                    String currentDir = System.getProperty("user.dir");
                     boolean firstTime=true;
-                    // System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
-                    // String filename=in.nextLine();
                     File file= new File(currentDir+"/"+filename);
                     Scanner sc = new Scanner(file);
                     while (sc.hasNextLine()){
@@ -1230,7 +1262,7 @@ class Matriks {
                 FilenameInput(true);
             }
             else {
-                System.out.println("Tolong masukan input yang benar.\n");
+                print("Tolong masukan input yang benar.\n\n");
             }
 
         }
@@ -1276,141 +1308,5 @@ class Matriks {
         //Matrix.TulisMatriks();
         
     }
-
-
-/*
-    void eselon(int M, int N, boolean isForDeterminant){
-        //sebelum mulai, dilihat dulu apakah fungsi ini digunakan untuk menghitung determinan atau tidak
-        if (isForDeterminant){
-            M = this.baris;
-            N = this.kolom;
-        }
-        //pengecekan apakah perlu Tukar menukar
-        int[] note = new int[M];
-        //isi array note dengan 999
-        for (int i = 0; i < M; i++){
-            note[i] = 999;
-        }
-        //mencatat kemunculan elemen non 0 di Matriks utama
-        int a=0;
-        int b=0;
-        boolean firstTime=true;
-        while (a<M){
-            b=0;
-            while (b<N){
-                if (this.Mat[a][b]!=0 && firstTime){
-                    note[a]=b;
-                    firstTime=false;
-                }
-                b++;
-            }
-            a++;
-            firstTime=true;
-        }
-        //mengecek apakah elemen non 0 yg pertama muncul sudah terurut. jika tidak, maka diperlukan Tukar menukar baris
-        boolean isSorted=true;
-        int temp=note[0];
-        //cek apakah terurut menaik
-        for (int i=1; i<M && isSorted;i++){
-            if (note[i]<temp){
-                isSorted=false;
-            }
-            temp=note[i];
-        }
-        
-        if (!isSorted){ //jika tidak terurut, maka harus Tukar menukar
-            for (int i=0;i<M-1;i++){
-                for (int j=i+1;j<M;j++){
-                    if (note[i]>note[j]){
-                        temp=note[i];
-                        note[i]=note[j];
-                        note[j]=temp;
-                        this.Tukar(i,j);
-                        this.determinant*=(-1);
-                    }
-                }
-            }
-        }
-        //lakukan operasi-operasi
-        int eselonOrder=0;
-        double operand;
-        int i=0;
-        //Matriks yg berada di kolom eselonOrder harus 1
-        this.EchelonBeOne(M,N);
-        //semua sudah terurut dan urutan eselon sudah seharusnya.
-        //sekarang, memastikan yg berada di bawah dan atas itu 0
-        //karena saya mager, jadi ini adalah barisan kode untuk memastikan yg bawah saja yg 0 dulu
-        eselonOrder= this.findEselonAt(0); //mencari elemen 1 pada kolom keberapa di suatu baris
-        int acuanBaris=0;
-        i=1;
-        boolean done=false;
-        while(i<M && !done){
-            if (this.Mat[i][eselonOrder]!=0){
-                if (this.Mat[i][eselonOrder]>0 && this.Mat[acuanBaris][eselonOrder]>0){
-                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
-                }
-                else if (this.Mat[i][eselonOrder]<0 && this.Mat[acuanBaris][eselonOrder]>0){
-                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
-                }
-                else if (this.Mat[i][eselonOrder]>0 & this.Mat[acuanBaris][eselonOrder]<0){
-                    this.OperasiThdBaris(i,eselonOrder,((this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
-                }
-                else{
-                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
-                }
-            }
-            if (eselonOrder==N-1 && i==M-1){
-                done=true;
-            }
-            if (i==M-1){
-                this.EchelonBeOne(M,N);
-                eselonOrder=this.findEselonAt(acuanBaris+1);
-                acuanBaris++;
-                i=acuanBaris+1;
-            }
-            else{
-                i++;
-            }
-        }
-        //sekarang memastikan atasnya itu 0
-        eselonOrder= this.findEselonAt(1); //mencari elemen 1 pada kolom keberapa di suatu baris
-        acuanBaris=1;
-        i=acuanBaris-1;
-        done=false;
-        while(!done){
-            if (this.Mat[i][eselonOrder]!=0){
-                if (this.Mat[i][eselonOrder]>0 && this.Mat[acuanBaris][eselonOrder]>0){
-                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
-                }
-                else if (this.Mat[i][eselonOrder]<0 && this.Mat[acuanBaris][eselonOrder]>0){
-                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
-                }
-                else if (this.Mat[i][eselonOrder]>0 & this.Mat[acuanBaris][eselonOrder]<0){
-                    this.OperasiThdBaris(i,eselonOrder,((this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
-                }
-                else{
-                    this.OperasiThdBaris(i,eselonOrder,(-1*(this.Mat[i][eselonOrder])/this.Mat[acuanBaris][eselonOrder]));
-                }
-            }
-            if (eselonOrder==N-1 && i<=0){
-                done=true;
-            }
-            else if (i==0){
-                this.EchelonBeOne(M,N);
-                eselonOrder=this.findEselonAt(acuanBaris+1);
-                acuanBaris++;
-                i=acuanBaris-1;
-            }
-            else{
-                i--;
-            }
-        }
-        System.out.println();
-        this.TulisMatriks();
-        System.out.println();
-        System.out.println("determinan : "+this.determinant);
-    }
-
-*/
 
 }
