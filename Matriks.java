@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.File; 
 
 class Matriks {
     //atribut
@@ -6,6 +7,8 @@ class Matriks {
     int baris;
     int kolom;
     int mark = -999;
+
+    static Scanner in = new Scanner(System.in);
 
     // ** CONSTRUCTOR ** //
     Matriks() {
@@ -23,20 +26,17 @@ class Matriks {
     
     //Isi elemen matriks sesuai M dan N
     void IsiMatriks(int M, int N) {
-        Scanner in = new Scanner(System.in);
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
                 this.Mat[i][j] = in.nextInt();
             }
         }
-        in.close();
         this.baris = M;
         this.kolom = N;
     }
 
     //Same shit, tpi khusus untuk interpolasi
     void IsiMatriksInterpolasi(int n) {
-        Scanner in = new Scanner(System.in);
         for (int i = 0; i <= n; i++) {
             double x = in.nextDouble();
             double y = in.nextDouble();
@@ -48,6 +48,16 @@ class Matriks {
         
         this.baris = n+1;
         this.kolom = n+2;
+    }
+
+    void IsiMatriksFile(int i,int N, String[] data){
+        double input;
+        for (int j = 0; j < N; j++) {
+            input=Double.parseDouble(data[j]);
+            this.Mat[i][j] = input;
+        }
+        this.baris++;
+        this.kolom = N;
     }
 
     //Print matriks ke layar
@@ -159,7 +169,7 @@ class Matriks {
         }
         //leading one menjadi 1, kemudian print jawaban
         EchelonBeOne(M, brs, kol);
-        PrintEchelonAnswer(M, brs, kol);
+        //PrintEchelonAnswer(M, brs, kol);
     }
 
     static void REF(double[][] M, int brs, int kol) {
@@ -201,7 +211,7 @@ class Matriks {
         }
         //leading one menjadi 1, kemudian print jawaban
         EchelonBeOne(M, brs, kol);
-        PrintEchelonREFAnswer(M, brs, kol);
+        //PrintEchelonREFAnswer(M, brs, kol);
     }
 
     static int findEselonAt(double[][] M,int barisKe,int kol){
@@ -646,6 +656,42 @@ class Matriks {
         }
         
     }
+    
+    //mengubah matriks menjadi transposenya
+    static void Transpose(double[][] M, int n) {
+        for (int i = 0; i < n-1; i++) {
+            for (int j = i+1; j < n; j++) {
+                double temp = M[i][j];
+                M[i][j] = M[j][i];
+                M[j][i] = temp;
+            }
+        }
+    }
+
+    static void Inverse2(double[][] M, int n) {
+        double[][] adjM = new double[n][n];
+        double det = determinant2(M, n);
+        double[][] tempM = new double[n-1][n-1];
+        
+        //mengisi matriks kofaktor dengan cara mencari determinan kofaktor i j
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                getMatrixCofactor(M, tempM, i, j, n);
+                adjM[i][j] = Math.pow(-1, i+j) * determinant2(tempM, n-1);
+            }
+        }
+        //menyalinnya ke matriks M kemudian transpose sehingga menjadi adjoin
+        CopyMatrix(adjM, M, n, n);
+        Transpose(M, n);
+        
+        //mengalikan dengan 1/det sehingga menghasilkan matriks inverse
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                M[i][j] *= (1/det);
+            }
+        }
+        
+}
 
 
     // ** SPL METODE MATRIKS BALIKAN ** //
@@ -926,22 +972,295 @@ class Matriks {
     }
 
     // ** DORAIFAA / DRIVER ** //
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        //MENU
+        int choice,choice2;
+        Matriks Matrix = new Matriks();
+        String currentDir = System.getProperty("user.dir");
+        while (true){
+            System.out.println("MENU");
+            System.out.println("1.Sistem Persamaaan Linier");
+            System.out.println("2.Determinan");
+            System.out.println("3.Matriks balikan");
+            System.out.println("4.Interpolasi Polinom");
+            System.out.println("5.Regresi linier berganda");
+            System.out.println("6.Keluar");
+            System.out.print("Masukkan pilihan anda (berupa nomor) : ");
+            choice=in.nextInt();
+            if (choice==1){
+                System.out.println("\nPilihan Metode SPL");
+                System.out.println("1.Metode eliminasi Gauss");
+                System.out.println("2.Metode eliminasi Gauss-Jordan");
+                System.out.println("3.Metode matriks balikan");
+                System.out.println("4.Kaidah Cramer");
+                System.out.print("Masukkan pilihan anda (berupa nomor) : ");
+                choice=in.nextInt();
+                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                choice2=in.nextInt();
+                if (choice2==1){
+                    System.out.print("\nMasukkan jumlah baris : ");
+                    int M = in.nextInt();
+                    System.out.print("Masukkan jumlah kolom : ");
+                    int N = in.nextInt();
+                    Matrix.IsiMatriks(M, N);
+                }
+                else{
+                    int i=0;
+                    int N;
+                    String data;
+                    String[] dataParts;
+                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    String filename=in.nextLine();
+                    File file= new File(currentDir+"/"+filename);
+                    Scanner sc = new Scanner(file);
+                    while (sc.hasNextLine()){
+                        data=sc.nextLine();
+                        dataParts=data.split(" ");
+                        N= dataParts.length;
+                        Matrix.IsiMatriksFile(i,N,dataParts);
+                        i++;
+                    }
+                }
+                switch(choice){
+                    case 1 :
+                        REF(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        PrintEchelonREFAnswer(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        break;
+                    case 2 :
+                        RREF(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        PrintEchelonAnswer(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        break;
+                    case 3 :
+                        SPLInverse(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        break;
+                    case 4 :
+                        SPLCramer(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        break;
+                }
+            }
+            else if(choice==2){
+                System.out.println("\nPilihan Metode Determinan");
+                System.out.println("1.Metode reduksi baris");
+                System.out.println("2.Metode ekspansi kofaktor");
+                System.out.print("Masukkan pilihan anda (berupa nomor) : ");
+                choice=in.nextInt();
+                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                choice2=in.nextInt();
+                if (choice2==1){
+                    System.out.print("\nMasukkan jumlah baris : ");
+                    int M = in.nextInt();
+                    System.out.print("Masukkan jumlah kolom : ");
+                    int N = in.nextInt();
+                    Matrix.IsiMatriks(M, N);
+                }
+                else{
+                    int i=0;
+                    int N;
+                    String data;
+                    String[] dataParts;
+                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    String filename=in.nextLine();
+                    File file= new File(currentDir+"/"+filename);
+                    Scanner sc = new Scanner(file);
+                    while (sc.hasNextLine()){
+                        data=sc.nextLine();
+                        dataParts=data.split(" ");
+                        N= dataParts.length;
+                        Matrix.IsiMatriksFile(i,N,dataParts);
+                        i++;
+                    }
+                }
+                double hasil;
+                switch(choice){
+                    case 1 :
+                        hasil = determinant1(Matrix.Mat,Matrix.kolom);
+                        System.out.println("Determinan = "+ hasil);
+                        break;
+                    case 2 :
+                        hasil = determinant2(Matrix.Mat,Matrix.kolom);
+                        System.out.println("Determinan = "+ hasil);
+                        break;
+                }
+            }
+            else if (choice==3){
+                System.out.println("\nPilihan Metode Invers");
+                System.out.println("1.Metode reduksi baris");
+                System.out.println("2.Metode adjoin");
+                System.out.print("Masukkan pilihan anda (berupa nomor) : ");
+                choice=in.nextInt();
+                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                choice2=in.nextInt();
+                if (choice2==1){
+                    System.out.print("\nMasukkan jumlah baris : ");
+                    int M = in.nextInt();
+                    System.out.print("Masukkan jumlah kolom : ");
+                    int N = in.nextInt();
+                    System.out.println("Masukkan isi matriks : ");
+                    Matrix.IsiMatriks(M, N);
+                }
+                else{
+                    int i=0;
+                    int N;
+                    String data;
+                    String[] dataParts;
+                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    String filename=in.nextLine();
+                    File file= new File(currentDir+"/"+filename);
+                    Scanner sc = new Scanner(file);
+                    while (sc.hasNextLine()){
+                        data=sc.nextLine();
+                        dataParts=data.split(" ");
+                        N= dataParts.length;
+                        Matrix.IsiMatriksFile(i,N,dataParts);
+                        i++;
+                    }
+                }
+                switch(choice){
+                    case 1:
+                        Inverse(Matrix.Mat,Matrix.baris);
+                        Matrix.TulisMatriks();
+                        break;
+                    case 2:
+                        Inverse2(Matrix.Mat,Matrix.baris);
+                        Matrix.TulisMatriks();
+                        break;
+                }
+            }
+            else if(choice==4){
+                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                choice=in.nextInt();
+                double N=0;
+                if (choice==1){
+                    System.out.print("\nMasukkan ukuran matriks (satu ukuran, mxm) : ");
+                    int M = in.nextInt();
+                    System.out.print("Nilai x yang akan ditaksir? : ");
+                    N = in.nextDouble();
+                    Matrix.IsiMatriksInterpolasi(M);
+                }
+                else{
+                    int i=0;
+                    int Kol;
+                    String data;
+                    String[] dataParts;
+                    boolean firstTime=true;
+                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    String filename=in.nextLine();
+                    File file= new File(currentDir+"/"+filename);
+                    Scanner sc = new Scanner(file);
+                    while (sc.hasNextLine()){
+                        if (firstTime){
+                            data=sc.nextLine();
+                            N=Double.parseDouble(data);
+                            firstTime=false;
+                        }
+                        else{
+                            data=sc.nextLine();
+                            dataParts=data.split(" ");
+                            Kol= dataParts.length;
+                            Matrix.IsiMatriksFile(i,Kol,dataParts);
+                            i++;
+                        }
+                    }
+                }
+                Interpolasi(Matrix.Mat, Matrix.baris, Matrix.kolom, N);
+            }
+            else if (choice==5){
+                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                choice=in.nextInt();
+                double N=0;
+                if (choice==1){
+                    System.out.println("\nMasukkan nilai xk yang akan ditaksir");
+                    N = in.nextDouble();
+                    System.out.println("Masukkan jumlah n");
+                    int M = in.nextInt();
+                    System.out.println("Masukkan jumlah i");
+                    int O = in.nextInt();
+                    System.out.println("Masukkan datanya dalam format");
+                    System.out.println("(x11..xn1,y1)");
+                    System.out.println("(...........)");
+                    System.out.println("(x1i..xni,yi)");
+                    Matrix.IsiMatriks(O,M+1);
+                }
+                else{
+                    int i=0;
+                    int Kol;
+                    String data;
+                    String[] dataParts;
+                    boolean firstTime=true;
+                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    String filename=in.nextLine();
+                    File file= new File(currentDir+"/"+filename);
+                    Scanner sc = new Scanner(file);
+                    while (sc.hasNextLine()){
+                        if (firstTime){
+                            data=sc.nextLine();
+                            N=Double.parseDouble(data);
+                            firstTime=false;
+                        }
+                        else{
+                            data=sc.nextLine();
+                            dataParts=data.split(" ");
+                            Kol= dataParts.length;
+                            Matrix.IsiMatriksFile(i,Kol,dataParts);
+                            i++;
+                        }
+                    }
+                }
+                regresi(Matrix.Mat, Matrix.baris, Matrix.kolom, N);
+
+            }
+            else if (choice==6){
+                break;
+            }
+            else if (choice>6){
+                System.out.println("Tolong masukan input yang benar.\n");
+            }
+            else{
+                System.out.print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
+                choice2=in.nextInt();
+                if (choice2==1){
+                    System.out.print("\nMasukkan jumlah baris : ");
+                    int M = in.nextInt();
+                    System.out.print("Masukkan jumlah kolom : ");
+                    int N = in.nextInt();
+                    Matrix.IsiMatriks(M, N);
+                }
+                else{
+                    int i=0;
+                    int N;
+                    String data;
+                    String[] dataParts;
+                    System.out.print("Nama file .txt? (Pastikan berada di directory yang sama. contoh input: \"test.txt\") : ");
+                    String filename=in.nextLine();
+                    File file= new File(currentDir+"/"+filename);
+                    Scanner sc = new Scanner(file);
+                    while (sc.hasNextLine()){
+                        data=sc.nextLine();
+                        dataParts=data.split(" ");
+                        N= dataParts.length;
+                        Matrix.IsiMatriksFile(i,N,dataParts);
+                        i++;
+                    }
+                }
+            }
+
+        }
+
         //input for regresi
         //made for my own testing sanity (Hagli)
-        Scanner in = new Scanner(System.in);
-        Matriks Matrix = new Matriks();
-        System.out.println("Masukkan nilai xk yang akan ditaksir");
-        double N = in.nextDouble();
-        System.out.println("Masukkan jumlah n");
-        int M = in.nextInt();
-        System.out.println("Masukkan jumlah i");
-        int O = in.nextInt();
-        System.out.println("Masukkan datanya dalam format");
-        System.out.println("(x11..xn1,y1)");
-        System.out.println("(...........)");
-        System.out.println("(x1i..xni,yi)");
-        Matrix.IsiMatriks(O,M+1);
+        // Scanner in = new Scanner(System.in);
+        // Matriks Matrix = new Matriks();
+        // System.out.println("Masukkan nilai xk yang akan ditaksir");
+        // double N = in.nextDouble();
+        // System.out.println("Masukkan jumlah n");
+        // int M = in.nextInt();
+        // System.out.println("Masukkan jumlah i");
+        // int O = in.nextInt();
+        // System.out.println("Masukkan datanya dalam format");
+        // System.out.println("(x11..xn1,y1)");
+        // System.out.println("(...........)");
+        // System.out.println("(x1i..xni,yi)");
+        // Matrix.IsiMatriks(O,M+1);
         
 
         //input for interpolasi
@@ -964,10 +1283,9 @@ class Matriks {
         //RREF(Matrix.Mat, Matrix.baris, Matrix.kolom);
         //REF(Matrix.Mat, Matrix.baris, Matrix.kolom);
         //interpolasi(Matrix.Mat, Matrix.baris, Matrix.kolom, N);
-        regresi(Matrix.Mat, Matrix.baris, Matrix.kolom, N);
+        // regresi(Matrix.Mat, Matrix.baris, Matrix.kolom, N);
         //Matrix.TulisMatriks();
         
-        in.close();
     }
 
 
