@@ -1,4 +1,4 @@
-# TubesAlgeo44
+# Tubes Algeo 1 Kel 44
 Tugas Besar IF2123 Aljabar Linier dan Geometri Semester 1 2020/2021 Kelompok 44
 
 Script utama ada di Matriks.java.
@@ -25,6 +25,4 @@ Input dari file belum ditest, terutama untuk yang interpolasi dan regresi. Silah
 P.S.S. Here's a pic for encouragement to work.
 
 ![Fuhrer](https://vignette.wikia.nocookie.net/megamitensei/images/4/48/Fuhrer.png)
-
-<p>- Iqbal 26/9/20 10:50pm</p>
 
