@@ -12,13 +12,19 @@ Script lain hanya untuk memudahkan mencari/membaca/checklist.
 
 P.S. Still need some more testing. All tests that have been done is tested through Matriks.java.
 
+## GUIDE INPUT DARI FILE (.TXT)
+Untuk selain interpolasi dan regresi, isi dari file .txt adalah isi matriksnya saja, yang masing-masing elemen per kolom dipisahkan oleh spasi dan per baris dipisahkan oleh newline (sesuai dengan file panduan tubes).
+
+Untuk interpolasi, baris pertama diisi oleh x yang akan ditaksir. Kemudian pada baris selanjutnya diisi oleh matriks.
+
+Untuk regresi, baris pertama diisi oleh xk yang akan ditaksir. Kemudian, pada baris selanjutnya diisi oleh matriks.
+
+Input dari file belum ditest, terutama untuk yang interpolasi dan regresi. Silahkan yang bisa mengecek, dicek dan tolong laporkan hasilnya.
+
+
 P.S.S. Here's a pic for encouragement to work.
 
 ![Fuhrer](https://vignette.wikia.nocookie.net/megamitensei/images/4/48/Fuhrer.png)
 
 <p>- Iqbal 26/9/20 10:50pm</p>
 
-P.S.S.S. No i won't work on this thing. I want to play animal crossing new leaf on nintendo 3ds instead
-![Warning](https://cdn.discordapp.com/attachments/601751285896708096/759731217783717918/IMG_20200926_074449.jpg)
-
-<p>- Safiq 27/9/20 23:32pm</p>
