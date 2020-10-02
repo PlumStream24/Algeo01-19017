@@ -75,6 +75,17 @@ class Matriks {
         }
     }
 
+    //resetting matriks
+    void reset(){
+        for (int i = 0; i < this.baris; i++) {
+            for (int j = 0; j < this.kolom; j++) {
+                this.Mat[i][j] = this.mark;
+            }
+        }
+        this.baris = 0;
+        this.kolom = 0;
+    }
+
     // ** FUNKY ** //
 
     //menukar 2 baris
@@ -914,8 +925,8 @@ class Matriks {
                 }
             }
         }
-        print(" + ε\n");
-        print("Taksiran "+randomx+" adalah "+KEKKA+" + ε\n");
+        print(" + error polinom\n");
+        print("Taksiran "+randomx+" adalah "+KEKKA+" + error polinom\n");
         //printing the not so unique solutions
         for (int hitler=0;hitler<kol-1;hitler++){
             if (unknownSolution[hitler]!=""){
@@ -1024,6 +1035,7 @@ class Matriks {
                     Matrix.IsiMatriks(M, N);
                 }
                 else{
+                    Matrix.reset();
                     int i=0;
                     int N;
                     String data;
@@ -1264,7 +1276,6 @@ class Matriks {
             else {
                 print("Tolong masukan input yang benar.\n\n");
             }
-
         }
 
         //input for regresi

@@ -146,8 +146,8 @@ public class regresi {
                 }
             }
         }
-        System.out.println(" + ε");
-        System.out.println("Taksiran "+randomx+" adalah "+KEKKA+" + ε");
+        print(" + error polinom\n");
+        print("Taksiran "+randomx+" adalah "+KEKKA+" + error polinom\n");
         //printing the not so unique solutions
         for (int hitler=0;hitler<kol-1;hitler++){
             if (unknownSolution[hitler]!=""){

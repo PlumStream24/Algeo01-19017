@@ -1,1 +1,379 @@
+!!WARNING!!
+Karena error yang belum bisa diselesaikan, maka input nama file (jika input melalui file) akan dilakukan diawal.
+Nama file txt? (Pastikan berada di directory yang sama. contoh input: "test.txt") : 
 
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode eliminasi Gauss]
+Matriks input : 
+1.0 1.0 -1.0 -1.0 1.0 
+2.0 5.0 -7.0 -5.0 -2.0 
+2.0 -1.0 1.0 3.0 4.0 
+5.0 2.0 -4.0 2.0 6.0 
+No Solution
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode eliminasi Gauss]
+Matriks input : 
+1.0 1.0 -1.0 -1.0 1.0 
+2.0 5.0 -7.0 -5.0 -2.0 
+2.0 -1.0 1.0 3.0 4.0 
+5.0 2.0 -4.0 2.0 6.0 
+No Solution
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode eliminasi Gauss-jordan]
+Matriks input : 
+1.0 1.0 -1.0 -1.0 1.0 
+2.0 5.0 -7.0 -5.0 -2.0 
+2.0 -1.0 1.0 3.0 4.0 
+5.0 2.0 -4.0 2.0 6.0 
+No Solution
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+Nama file txt? (Pastikan berada di directory yang sama. contoh input: "test.txt") : 
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode matriks balikan]
+Matriks input : 
+1.0 -1.0 0.0 0.0 1.0 3.0 
+1.0 1.0 0.0 -3.0 0.0 6.0 
+2.0 -1.0 0.0 1.0 -1.0 5.0 
+-1.0 2.0 0.0 -2.0 -1.0 -1.0 
+Matriks tidak memiliki inverse
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode crammer]
+Matriks input : 
+1.0 -1.0 0.0 0.0 1.0 3.0 
+1.0 1.0 0.0 -3.0 0.0 6.0 
+2.0 -1.0 0.0 1.0 -1.0 5.0 
+-1.0 2.0 0.0 -2.0 -1.0 -1.0 
+SPL tidak memiliki solusi unik
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+Nama file txt? (Pastikan berada di directory yang sama. contoh input: "test.txt") : 
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode eliminasi Gauss-jordan]
+Matriks input : 
+0.0 1.0 0.0 0.0 1.0 0.0 2.0 
+0.0 0.0 0.0 1.0 1.0 0.0 -1.0 
+0.0 1.0 0.0 0.0 0.0 1.0 1.0 
+x1 = -1.0x6 + 1.0
+x2 = -1.0x6 + -2.0
+x3 = 1.0x6 + 1.0
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode matriks balikan]
+Matriks input : 
+0.0 1.0 0.0 0.0 1.0 0.0 2.0 
+0.0 0.0 0.0 1.0 1.0 0.0 -1.0 
+0.0 1.0 0.0 0.0 0.0 1.0 1.0 
+Matriks tidak memiliki inverse
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode crammer]
+Matriks input : 
+0.0 1.0 0.0 0.0 1.0 0.0 2.0 
+0.0 0.0 0.0 1.0 1.0 0.0 -1.0 
+0.0 1.0 0.0 0.0 0.0 1.0 1.0 
+SPL tidak memiliki solusi unik
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode eliminasi Gauss]
+Matriks input : 
+0.0 1.0 0.0 0.0 1.0 0.0 2.0 
+0.0 0.0 0.0 1.0 1.0 0.0 -1.0 
+0.0 1.0 0.0 0.0 0.0 1.0 1.0 
+1.0x2  + 1.0x5  = 2.0
+1.0x4  + 1.0x5  = -1.0
+1.0x5  + -1.0x6  = 1.0
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+Nama file txt? (Pastikan berada di directory yang sama. contoh input: "test.txt") : 
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+!!WARNING!!
+Karena error yang belum bisa diselesaikan, maka input nama file (jika input melalui file) akan dilakukan diawal.
+Nama file txt? (Pastikan berada di directory yang sama. contoh input: "test.txt") : 
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode eliminasi Gauss]
+Matriks input : 
+1.0 0.5 0.33333333 0.25 0.2 0.16161616 1.0 
+0.5 0.33333333 0.25 0.2 0.16161616 0.142857 0.0 
+0.33333333 0.25 0.2 0.16161616 0.142857 0.125 0.0 
+0.25 0.2 0.16161616 0.142857 0.125 0.111111111 0.0 
+0.2 0.16161616 0.142857 0.125 0.111111111 0.1 0.0 
+0.16161616 0.142857 0.125 0.111111111 0.1 0.0909090909 0.0 
+x1 = 4.991098991073568
+x2 = -2.2206014900217212
+x3 = -10.715729595873682
+x4 = -16.658455723571407
+x5 = 2.4282951815759546
+x6 = 27.039786603561684
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode eliminasi Gauss-jordan]
+Matriks input : 
+1.0 0.5 0.33333333 0.25 0.2 0.16161616 1.0 
+0.5 0.33333333 0.25 0.2 0.16161616 0.142857 0.0 
+0.33333333 0.25 0.2 0.16161616 0.142857 0.125 0.0 
+0.25 0.2 0.16161616 0.142857 0.125 0.111111111 0.0 
+0.2 0.16161616 0.142857 0.125 0.111111111 0.1 0.0 
+0.16161616 0.142857 0.125 0.111111111 0.1 0.0909090909 0.0 
+x1 = 1.684968263233435E-17x2 + 1.8090208465898045E-17x4 + 4.99109899107359
+x2 = -2.2792382186953237E-16x4 + -2.2206014900228492
+x3 = -0.9999999999999999x3 + 2.468546548782879E-16x4 + -10.715729595872451
+x4 = -0.9999999999999999x4 + -16.658455723569606
+x5 = 2.970496345622605E-16x4 + -1.0x5 + 2.4282951815774374
+x6 = -7.591401879901251E-16x4 + -1.0x6 + 27.039786603557893
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
