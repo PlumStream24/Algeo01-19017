@@ -199,14 +199,59 @@ Matriks masukan program:
 3 0 0 -3 -3
 
 Output program:
-[Metode eliminasi Gauss]
+[Metode eliminasi Gauss-jordan]
 Matriks input : 
 1.0 -1.0 2.0 -1.0 -1.0 
 2.0 1.0 -2.0 -2.0 -2.0 
 -1.0 2.0 -4.0 1.0 1.0 
 3.0 0.0 0.0 -3.0 -3.0 
-1.0x1  + -1.0x2  + 2.0x3  + -1.0x4  = -1.0
+Nilai-nilainya:
+1.0x1  + -1.0x4  = -1.0
 1.0x2  + -2.0x3  = 0.0
+
+2.b.
+Matriks masukan program:
+2 0 8 0 8
+0 1 0 4 6
+-4 0 6 0 6
+0 -2 0 3 -1
+2 0 -4 0 -4
+0 1 0 -2 0
+
+Output program:
+[Metode eliminasi Gauss-jordan]
+Matriks input : 
+2.0 0.0 8.0 0.0 8.0 
+0.0 1.0 0.0 4.0 6.0 
+-4.0 0.0 6.0 0.0 6.0 
+0.0 -2.0 0.0 3.0 -1.0 
+2.0 0.0 -4.0 0.0 -4.0 
+0.0 1.0 0.0 -2.0 0.0 
+Nilai-nilainya:
+x1 = 0.0
+x2 = 2.0
+x3 = 1.0
+x4 = 1.0
+
+3.a.
+Matriks masukan program:
+8 1 3 2 0
+2 9 -1 -2 1
+1 3 2 -1 2
+1 0 6 4 3
+
+Output program:
+[Metode eliminasi Gauss-jordan]
+Matriks input : 
+8.0 1.0 3.0 2.0 0.0 
+2.0 9.0 -1.0 -2.0 1.0 
+1.0 3.0 2.0 -1.0 2.0 
+1.0 0.0 6.0 4.0 3.0 
+Nilai-nilainya:
+x1 = -0.22432432432432442
+x2 = 0.18243243243243248
+x3 = 0.7094594594594595
+x4 = -0.258108108108108
 
 INTERPOLASI TIME BOIS
 
