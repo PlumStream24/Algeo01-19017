@@ -387,3 +387,52 @@ d. Matriks masukan:
 Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
 p9(x) = 2.2709637445306993E8  + -4.158426375206201E8x + 3.181500632157087E8x^2 + -1.3600328369542953E8x^3 + 3.617603892422639E7x^4 + -6249554.466640718x^5 + 704212.2777597008x^6 + -50061.954552926865x^7 + 2041.9197262909072x^8 + -36.47095677262133x^9
 Hasil taksirannya = 135043.66273880005
+
+8.
+a. x = 50
+Matriks masukan program:
+50
+20 863.1 1530.4 587.84 19.42
+863.1 54876.89 67000.09 25283.395 779.477
+1530.4 67000.09 117912.32 44976.867 1483.437
+587.84 25283.395 44976.867 17278.5086 571.1219
+Output program:
+=====REGRESI LINIER BERGANDA=====
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+Apakah matriks sudah dalam bentuk matriks regresi?
+1.Ya
+2.Tidak
+yi =  + 6431.406606597999x1i - 421.7413204866706x2i + 908547.6973439702x3i + 612699.2450555129x4i + error polinom
+Taksiran x = 50.0 adalah 4.881858966585775E7 + error polinom
+
+b. x = 76
+Matriks masukan program:
+76
+20 863.1 1530.4 587.84 19.42
+863.1 54876.89 67000.09 25283.395 779.477
+1530.4 67000.09 117912.32 44976.867 1483.437
+587.84 25283.395 44976.867 17278.5086 571.1219
+Output program:
+=====REGRESI LINIER BERGANDA=====
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+Apakah matriks sudah dalam bentuk matriks regresi?
+1.Ya
+2.Tidak
+yi =  + 17316.774480589484x1i - 269.5999551376785x2i + 3172244.18342669x3i + 612699.2450555129x4i + error polinom
+Taksiran x = 76.0 adalah 1.9439107820196912E8 + error polinom
+
+c. x = 29.3
+Matriks masukan program:
+29.30
+20 863.1 1530.4 587.84 19.42
+863.1 54876.89 67000.09 25283.395 779.477
+1530.4 67000.09 117912.32 44976.867 1483.437
+587.84 25283.395 44976.867 17278.5086 571.1219
+Output program:
+=====REGRESI LINIER BERGANDA=====
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+Apakah matriks sudah dalam bentuk matriks regresi?
+1.Ya
+2.Tidak
+yi =  + 52769.44023893615x1i + 226.6797340857898x2i + 1.054490516599145E7x3i + 612699.2450555129x4i + error polinom
+Taksiran x = 29.3 adalah 1.5645201226040177E7 + error polinom

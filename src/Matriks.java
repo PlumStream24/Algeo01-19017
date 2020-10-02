@@ -945,7 +945,7 @@ class Matriks {
             }
         }
         print(" + error polinom\n");
-        print("Taksiran "+randomx+" adalah "+KEKKA+" + error polinom\n");
+        print("Taksiran x = "+randomx+" adalah "+KEKKA+" + error polinom\n");
         //printing the not so unique solutions
         for (int hitler=0;hitler<kol-1;hitler++){
             if (unknownSolution[hitler]!=""){
@@ -955,51 +955,58 @@ class Matriks {
     }
 
     static void regresi(double[][] M, int brs, int kol, double randomx) throws Exception{
+        print("Apakah matriks sudah dalam bentuk matriks regresi?\n1.Ya\n2.Tidak\n");
+        int NANI = in.nextInt();
         int kolA = kol+1;
-        double[][] funky = new double[kol][kolA];
-        for (int i = 0;i<kol;i++){
-            for (int j = 0;j<kolA;j++){
-                if (((j==0) || (i==0)) && (j!=kol)) {
-                    if ((j==0) && (i==0)){
-                        funky[i][j] = kol-1;
-                    }
-                    else if (i==0){
-                        int sajam = 0;
-                        for (int k = 0;k<brs;k++){
-                            sajam += M[k][j-1];
+        if(NANI==2){
+            double[][] funky = new double[kol][kolA];
+            for (int i = 0;i<kol;i++){
+                for (int j = 0;j<kolA;j++){
+                    if (((j==0) || (i==0)) && (j!=kol)) {
+                        if ((j==0) && (i==0)){
+                            funky[i][j] = kol-1;
                         }
-                        funky [i][j] = sajam;
+                        else if (i==0){
+                            int sajam = 0;
+                            for (int k = 0;k<brs;k++){
+                                sajam += M[k][j-1];
+                            }
+                            funky [i][j] = sajam;
+                        }
+                        else{
+                            funky [i][j] = funky[j][i];
+                        }
                     }
-                    else{
-                        funky [i][j] = funky[j][i];
-                    }
-                }
-                else if(j!=kol){
-                    int sajam = 0;
-                    for(int k = 0;k<brs;k++){
-                        sajam += M[k][j-1]*M[k][i-1];
-                    }
-                    funky[i][j] = sajam;
-                }
-                else if(j==kol){
-                    if (i==0){
+                    else if(j!=kol){
                         int sajam = 0;
                         for(int k = 0;k<brs;k++){
-                            sajam += M[k][j-1];
+                            sajam += M[k][j-1]*M[k][i-1];
                         }
                         funky[i][j] = sajam;
                     }
-                    else{
-                        int sajam = 0;
-                        for(int k = 0;k<brs;k++){
-                            sajam += M[k][i-1]*M[k][j-1];
+                    else if(j==kol){
+                        if (i==0){
+                            int sajam = 0;
+                            for(int k = 0;k<brs;k++){
+                                sajam += M[k][j-1];
+                            }
+                            funky[i][j] = sajam;
                         }
-                        funky[i][j] = sajam;
+                        else{
+                            int sajam = 0;
+                            for(int k = 0;k<brs;k++){
+                                sajam += M[k][i-1]*M[k][j-1];
+                            }
+                            funky[i][j] = sajam;
+                        }
                     }
                 }
             }
+            REFRegresi(funky, kol, kolA, randomx);
         }
-        REFRegresi(funky, kol, kolA, randomx);
+        else{
+            REFRegresi(M, kol, kolA, randomx);
+        }
         //printing this shit
         /*for (int i = 0;i<kol;i++){
             for (int j = 0;j<kolA;j++){
