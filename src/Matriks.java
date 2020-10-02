@@ -759,14 +759,16 @@ class Matriks {
         RREF(M, brs, kol);
 
         //mengoutput fungsi
-        print("p" + (brs-1) + "(x) = " + M[0][kol-1] + " + ");
+        print("p" + (brs-1) + "(x) = " + M[0][kol-1]+" ");
         for (int i = 1; i < brs; i++) {
-            if (i == brs-1) {
-                print(M[i][kol-1] + "x^" + (brs-1));
+            if (M[i][kol-1] == 0) {
+                continue;
+            } else if (i == brs-1) {
+                print(" + "+M[i][kol-1] + "x^" + (brs-1));
             } else if (i == 1) {
-                print(M[i][kol-1] + "x + ");
+                print(" + "+M[i][kol-1] + "x");
             } else {
-                print(M[i][kol-1] + "x^" + i + " + ");
+                print(" + "+M[i][kol-1] + "x^" + i);
             }
         }
         print("\n");
@@ -775,7 +777,7 @@ class Matriks {
         for (int i = 0; i < brs; i++) {
             hasilTaksir += M[i][kol-1] * Math.pow(taksir, i);
         }
-        print(hasilTaksir+"\n");
+        print("Hasil taksirannya = "+hasilTaksir+"\n");
     }
 
     //regresion-borne
@@ -1065,7 +1067,7 @@ class Matriks {
                         print("Matriks input : \n");
                         Matrix.TulisMatriks();
                         RREF(Matrix.Mat, Matrix.baris, Matrix.kolom);
-                        PrintEchelonAnswer(Matrix.Mat, Matrix.baris, Matrix.kolom);
+                        PrintEchelonREFAnswer(Matrix.Mat, Matrix.baris, Matrix.kolom);
                         print("\n");
                         break;
                     case 3 :
@@ -1098,6 +1100,7 @@ class Matriks {
                     Matrix.IsiMatriks(M, N);
                 }
                 else{
+                    Matrix.reset();
                     int i=0;
                     int N;
                     String data;
@@ -1146,6 +1149,7 @@ class Matriks {
                     Matrix.IsiMatriks(M, N);
                 }
                 else{
+                    Matrix.reset();
                     int i=0;
                     int N;
                     String data;
@@ -1195,6 +1199,7 @@ class Matriks {
                     Matrix.IsiMatriksInterpolasi(M);
                 }
                 else{
+                    Matrix.reset();
                     int i=0;
                     int Kol;
                     String data;
@@ -1240,6 +1245,7 @@ class Matriks {
                     Matrix.IsiMatriks(O,M+1);
                 }
                 else{
+                    Matrix.reset();
                     int i=0;
                     int Kol;
                     String data;
