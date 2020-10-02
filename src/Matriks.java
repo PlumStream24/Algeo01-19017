@@ -53,6 +53,22 @@ class Matriks {
         this.kolom = n+2;
     }
 
+    //changing normal matriks into inter matriks
+    void ChangeIntoInter(int n){
+        double[][] newMat = new double[n][n+1];
+        for (int i = 0;i<n;i++){
+            for (int j = 0;j<n;++j){
+                newMat[i][j] = Math.pow(this.Mat[i][0],j);
+            }
+            this.Mat[i][n] = this.Mat[i][1];
+            for(int k = 0;k<n;++k){
+                this.Mat[i][k] = newMat[i][k];
+            }
+        }
+        this.baris = n;
+        this.kolom = n+1;
+    }
+
     void IsiMatriksFile(int i,int N, String[] data){
         double input;
         for (int j = 0; j < N; j++) {
@@ -1217,6 +1233,7 @@ class Matriks {
                             i++;
                         }
                     }
+                    Matrix.ChangeIntoInter(Matrix.baris);
                     in= new Scanner(System.in);
                 }
                 Interpolasi(Matrix.Mat, Matrix.baris, Matrix.kolom, N);

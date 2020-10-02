@@ -211,8 +211,8 @@ a. Matriks masukan:
 Output:
 =====INTERPOLASI POLINOM=====
 Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
-p6(x) = 0.0  + 0.9999999999999999x + 5.551115123125783E-17x^5
-Hasil taksirannya = 0.19999999999999998
+p6(x) = -0.022976562500000665  + 0.24000000000000654x + 0.1973958333332714x^2 + 1.7459720735166883E-13x^3 + 0.02604166666644281x^4 + 1.3936515425494164E-13x^5 + -3.354250471127834E-14x^6
+Hasil taksirannya = 0.032960937499999246
 
 b. Matriks masukan:
 0.55
@@ -226,8 +226,8 @@ b. Matriks masukan:
 Output:
 =====INTERPOLASI POLINOM=====
 Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
-p6(x) = 0.0  + 0.9999999999999999x + 5.551115123125783E-17x^5
-Hasil taksirannya = 0.5499999999999999
+p6(x) = -0.022976562500000665  + 0.24000000000000654x + 0.1973958333332714x^2 + 1.7459720735166883E-13x^3 + 0.02604166666644281x^4 + 1.3936515425494164E-13x^5 + -3.354250471127834E-14x^6
+Hasil taksirannya = 0.1711186523437489
 
 c. Matriks masukan:
 0.85
@@ -241,8 +241,8 @@ c. Matriks masukan:
 Output:
 =====INTERPOLASI POLINOM=====
 Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
-p6(x) = 0.0  + 0.9999999999999999x + 5.551115123125783E-17x^5
-Hasil taksirannya = 0.8499999999999999
+p6(x) = -0.022976562500000665  + 0.24000000000000654x + 0.1973958333332714x^2 + 1.7459720735166883E-13x^3 + 0.02604166666644281x^4 + 1.3936515425494164E-13x^5 + -3.354250471127834E-14x^6
+Hasil taksirannya = 0.3372358398437497
 
 d. Matriks masukan:
 1.28
@@ -256,8 +256,8 @@ d. Matriks masukan:
 Output:
 =====INTERPOLASI POLINOM=====
 Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
-p6(x) = 0.0  + 0.9999999999999999x + 5.551115123125783E-17x^5
-Hasil taksirannya = 1.28
+p6(x) = -0.022976562500000665  + 0.24000000000000654x + 0.1973958333332714x^2 + 1.7459720735166883E-13x^3 + 0.02604166666644281x^4 + 1.3936515425494164E-13x^5 + -3.354250471127834E-14x^6
+Hasil taksirannya = 0.6775418375000027
 
 6.
 a. Matriks masukan:
@@ -275,8 +275,8 @@ a. Matriks masukan:
 Output:
 =====INTERPOLASI POLINOM=====
 Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
-p9(x) = 0.01.0x + 1.4551915228366852E-11x^9
-Hasil taksirannya = 5.80610909715857
+p9(x) = 2.2709637445306993E8  + -4.158426375206201E8x + 3.181500632157087E8x^2 + -1.3600328369542953E8x^3 + 3.617603892422639E7x^4 + -6249554.466640718x^5 + 704212.2777597008x^6 + -50061.954552926865x^7 + 2041.9197262909072x^8 + -36.47095677262133x^9
+Hasil taksirannya = 22798.04701501131
 
 b. Matriks masukan:
 8.968 (tanggal 30/08/20)
@@ -292,9 +292,9 @@ b. Matriks masukan:
 9.333 145510
 Output:
 =====INTERPOLASI POLINOM=====
-Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) :
-p9(x) = 0.0 + 1.0x + 1.4551915228366852E-11x^9
-Hasil taksirannya = 8.973459848001154
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+p9(x) = 2.2709637445306993E8  + -4.158426375206201E8x + 3.181500632157087E8x^2 + -1.3600328369542953E8x^3 + 3.617603892422639E7x^4 + -6249554.466640718x^5 + 704212.2777597008x^6 + -50061.954552926865x^7 + 2041.9197262909072x^8 + -36.47095677262133x^9
+Hasil taksirannya = 175775.06212806702
 
 c. Matriks masukan:
 9.5 (tanggal 15/09/20)
@@ -311,8 +311,8 @@ c. Matriks masukan:
 Output:
 =====INTERPOLASI POLINOM=====
 Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
-p9(x) = 0.0  + 1.0x + 1.4551915228366852E-11x^9
-Hasil taksirannya = 9.50917133598304
+p9(x) = 2.2709637445306993E8  + -4.158426375206201E8x + 3.181500632157087E8x^2 + -1.3600328369542953E8x^3 + 3.617603892422639E7x^4 + -6249554.466640718x^5 + 704212.2777597008x^6 + -50061.954552926865x^7 + 2041.9197262909072x^8 + -36.47095677262133x^9
+Hasil taksirannya = 68222.10010910034
 
 d. Matriks masukan:
 9.366 (tanggal 11/09/20)
@@ -328,5 +328,5 @@ d. Matriks masukan:
 9.333 145510
 =====INTERPOLASI POLINOM=====
 Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
-p9(x) = 0.0  + 1.0x + 1.4551915228366852E-11x^9
-Hasil taksirannya = 9.374070631852428
+p9(x) = 2.2709637445306993E8  + -4.158426375206201E8x + 3.181500632157087E8x^2 + -1.3600328369542953E8x^3 + 3.617603892422639E7x^4 + -6249554.466640718x^5 + 704212.2777597008x^6 + -50061.954552926865x^7 + 2041.9197262909072x^8 + -36.47095677262133x^9
+Hasil taksirannya = 135043.66273880005
