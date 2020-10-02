@@ -31,7 +31,7 @@ class Matriks {
         print("Masukkan elemen-elemen matriks : \n");
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
-                this.Mat[i][j] = in.nextInt();
+                this.Mat[i][j] = in.nextDouble();
             }
         }
         this.baris = M;
