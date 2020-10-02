@@ -1,0 +1,79 @@
+!!WARNING!!
+Karena error yang belum bisa diselesaikan, maka input nama file (jika input melalui file) akan dilakukan diawal.
+Nama file txt? (Pastikan berada di directory yang sama. contoh input: "test.txt") : 
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====SISTEM PERSAMAAN LINIER=====
+Pilihan Metode SPL
+1.Metode eliminasi Gauss
+2.Metode eliminasi Gauss-Jordan
+3.Metode matriks balikan
+4.Kaidah Cramer
+Masukkan pilihan anda (berupa nomor) : 
+Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : 
+[Metode eliminasi Gauss]
+Matriks input : 
+1.0 0.0 0.0 3.0 
+0.0 1.0 0.0 4.0 
+0.0 0.0 1.0 5.0 
+Nilai-nilainya:
+x1 = 3.0
+x2 = 4.0
+x3 = 5.0
+
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+!!WARNING!!
+Karena error yang belum bisa diselesaikan, maka input nama file (jika input melalui file) akan dilakukan diawal.
+Nama file txt? (Pastikan berada di directory yang sama. contoh input: "test.txt") : 
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
+
+=====MATRIKS BALIKAN/INVERS=====
+Pilihan Metode Invers
+1.Metode reduksi baris
+2.Metode adjoin
+Masukkan pilihan anda (berupa nomor) : Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : [Metode reduksi baris]
+Matriks input : 
+1.0 0.0 0.0 3.0 
+0.0 1.0 0.0 4.0 
+0.0 0.0 1.0 5.0 
+Matriks invers : 
+1.0 0.0 0.0 3.0 
+0.0 1.0 0.0 4.0 
+0.0 0.0 1.0 5.0 
+
+#####MENU#####
+1.Sistem Persamaaan Linier
+2.Determinan
+3.Matriks balikan
+4.Interpolasi Polinom
+5.Regresi linier berganda
+6.Ganti nama file
+7.Keluar
+Masukkan pilihan anda (berupa nomor) : 
