@@ -373,6 +373,7 @@ class Matriks {
         }
 
         //Printing the solutions
+        print("Nilai-nilainya:\n");
         for (int hitler=0;hitler<kol-1;hitler++){
             //printing the valid solution/unique solution
             if (solutionIsDefineable[hitler]){
