@@ -1,8 +1,14 @@
 # Tubes Algeo 1 Kel 44
 Tugas Besar IF2123 Aljabar Linier dan Geometri Semester 1 2020/2021 Kelompok 44
 
+Anggota Kelompok :
+13519017 M Galih R R
+13519145 Safiq Faray
+13519152 M Iqbal Sigid
+
 Script utama ada di src/Matriks.java
 Java bytecode-nya ada di bin/Matriks.class
+Laporan berada di file doc
 
 Pada file src, terdapat :
 * All other function scripts
@@ -23,7 +29,7 @@ Untuk regresi, baris pertama diisi oleh xk yang akan ditaksir. Kemudian, pada ba
 Pastikan file .txt yang akan dijadikan input directorynya sama dengan program utama yang akan dijalankan, yaitu Matriks.class (berada di folder bin)
 
 
-P.S.S. Here's a pic for encouragement to work.
+P.S. Thank you for the hardwork guys.
 
 ![Fuhrer](https://vignette.wikia.nocookie.net/megamitensei/images/4/48/Fuhrer.png)
 
