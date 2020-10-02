@@ -1093,11 +1093,9 @@ class Matriks {
                 print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : \n");
                 choice2=in.nextInt();
                 if (choice2==1){
-                    print("\nMasukkan jumlah baris : \n");
-                    int M = in.nextInt();
-                    print("Masukkan jumlah kolom : \n");
+                    print("Masukkan dimensi matriks : \n");
                     int N = in.nextInt();
-                    Matrix.IsiMatriks(M, N);
+                    Matrix.IsiMatriks(N, N);
                 }
                 else{
                     Matrix.reset();
@@ -1141,12 +1139,10 @@ class Matriks {
                 print("Apakah akan memasukkan input dari 1)keyboard or 2)file? (masukkan angka pilihan) : ");
                 choice2=in.nextInt();
                 if (choice2==1){
-                    print("\nMasukkan jumlah baris : \n");
-                    int M = in.nextInt();
-                    print("Masukkan jumlah kolom : \n");
+                    print("Masukkan dimensi matriks : \n");
                     int N = in.nextInt();
                     print("Masukkan isi matriks : \n");
-                    Matrix.IsiMatriks(M, N);
+                    Matrix.IsiMatriks(N, N);
                 }
                 else{
                     Matrix.reset();
