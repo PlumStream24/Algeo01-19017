@@ -316,7 +316,7 @@ class Matriks {
         //mengisi array pivotValue
         FillPivotSolution(M, pivotValue, brs, kol);
         
-        for (int i = brs-1; i >= 0; i--) {
+        for (int i = (brs > kol) ? (kol-1) : (brs-1); i >= 0; i--) {
             //mengecek apakah baris merupakan pivot atau bukan
             pivot = true;
             leadingOneFound = false;
@@ -399,8 +399,8 @@ class Matriks {
                     zero = false;
                 }
             }
-            if (zero) {
-                return (M[i][kol-1] != 0);
+            if (zero && M[i][kol-1] != 0) {
+                return true;
             }
         }
         return false;
